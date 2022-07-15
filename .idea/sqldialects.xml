@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/DatabaseGenerator/cars.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/DatabaseGenerator/passengers.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/DatabaseGenerator/tours.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Models/Account.py" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Models/Car.py" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Models/Passenger.py" dialect="TSQL" />
+  </component>
+</project>
