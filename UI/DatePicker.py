@@ -1,6 +1,5 @@
 from typing import Union, List
 import jdatetime
-from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QDialog, QPushButton
 from UI.Ui_DatePicker import Ui_DatePicker
 

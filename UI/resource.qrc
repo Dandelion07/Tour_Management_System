@@ -1,5 +1,13 @@
 <RCC>
   <qresource prefix="icons">
+    <file>resources/icons/return.png</file>
+    <file>resources/icons/signIn.png</file>
+    <file>resources/icons/manager.png</file>
+    <file>resources/icons/user.png</file>
+    <file>resources/icons/error.png</file>
+    <file>resources/icons/info.png</file>
+    <file>resources/icons/warning.png</file>
+    <file>resources/icons/question.png</file>
     <file>resources/icons/icon.png</file>
     <file>resources/icons/DatePickerIcon.png</file>
   </qresource>
