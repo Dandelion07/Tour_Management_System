@@ -6,21 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>380</height>
+    <width>367</width>
+    <height>421</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>300</width>
-    <height>380</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>300</width>
-    <height>380</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>انتخاب تاریخ</string>
@@ -29,2537 +17,2087 @@
    <iconset resource="resource.qrc">
     <normaloff>:/icons/resources/icons/DatePickerIcon.png</normaloff>:/icons/resources/icons/DatePickerIcon.png</iconset>
   </property>
-  <widget class="QSpinBox" name="spnYear">
-   <property name="geometry">
-    <rect>
-     <x>65</x>
-     <y>10</y>
-     <width>65</width>
-     <height>30</height>
-    </rect>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>10</number>
    </property>
-   <property name="minimumSize">
-    <size>
-     <width>65</width>
-     <height>30</height>
-    </size>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
    </property>
-   <property name="maximumSize">
-    <size>
-     <width>65</width>
-     <height>30</height>
-    </size>
+   <property name="leftMargin">
+    <number>10</number>
    </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
+   <property name="topMargin">
+    <number>10</number>
    </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
+   <property name="rightMargin">
+    <number>10</number>
    </property>
-   <property name="minimum">
-    <number>1000</number>
-   </property>
-   <property name="maximum">
-    <number>9999</number>
-   </property>
-   <property name="value">
-    <number>1401</number>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="cmbMonth">
-   <property name="geometry">
-    <rect>
-     <x>135</x>
-     <y>10</y>
-     <width>100</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>100</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>100</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <property name="maxVisibleItems">
-    <number>12</number>
-   </property>
-   <property name="maxCount">
-    <number>12</number>
-   </property>
-   <property name="insertPolicy">
-    <enum>QComboBox::NoInsert</enum>
-   </property>
-   <property name="sizeAdjustPolicy">
-    <enum>QComboBox::AdjustToContents</enum>
+   <property name="bottomMargin">
+    <number>10</number>
    </property>
    <item>
-    <property name="text">
-     <string>فروردین</string>
-    </property>
+    <layout class="QHBoxLayout" name="HLayoutDate">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <item>
+      <widget class="QPushButton" name="btnNextMonth">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>120</red>
+             <green>120</green>
+             <blue>120</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+         <underline>true</underline>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>ماه بعد</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="HLayoutMonthYear">
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <item>
+        <widget class="QSpinBox" name="spnYear">
+         <property name="font">
+          <font>
+           <family>B Nazanin</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="minimum">
+          <number>1000</number>
+         </property>
+         <property name="maximum">
+          <number>9999</number>
+         </property>
+         <property name="value">
+          <number>1401</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="cmbMonth">
+         <property name="font">
+          <font>
+           <family>B Nazanin</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+         <property name="maxCount">
+          <number>12</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContents</enum>
+         </property>
+         <item>
+          <property name="text">
+           <string>فروردین</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>اردیبهشت</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>خرداد</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>تیر</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>مرداد</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>شهریور</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>مهر</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>آبان</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>آذر</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>دی</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>بهمن</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>اسفند</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnPrevMonth">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>120</red>
+             <green>120</green>
+             <blue>120</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+         <underline>true</underline>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>ماه قبل</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <property name="text">
-     <string>اردیبهشت</string>
-    </property>
+    <layout class="QGridLayout" name="GLayoutDays">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="3" column="4">
+      <widget class="QPushButton" name="btn22">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QPushButton" name="btn13">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="btn05">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QPushButton" name="btn55">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="btn36">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="btn15">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4">
+      <widget class="QPushButton" name="btn42">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QPushButton" name="btn44">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="6">
+      <widget class="QPushButton" name="btn50">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QPushButton" name="btn16">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="5">
+      <widget class="QPushButton" name="btn41">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5">
+      <widget class="QLabel" name="lblSun">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>ی</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QPushButton" name="btn46">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <widget class="QPushButton" name="btn02">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="4">
+      <widget class="QPushButton" name="btn32">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="6">
+      <widget class="QPushButton" name="btn00">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QPushButton" name="btn23">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="5">
+      <widget class="QPushButton" name="btn21">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="lblTue">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>س</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="3">
+      <widget class="QPushButton" name="btn53">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="6">
+      <widget class="QPushButton" name="btn20">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="6">
+      <widget class="QPushButton" name="btn30">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="btn35">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QLabel" name="lblMon">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>د</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="6">
+      <widget class="QPushButton" name="btn10">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QPushButton" name="btn43">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPushButton" name="btn25">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="btn04">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="5">
+      <widget class="QPushButton" name="btn11">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="btn14">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="lblWed">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>چ</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="5">
+      <widget class="QPushButton" name="btn31">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QPushButton" name="btn34">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="6">
+      <widget class="QLabel" name="lblSat">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>ش</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="4">
+      <widget class="QPushButton" name="btn52">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="6">
+      <widget class="QPushButton" name="btn40">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="5">
+      <widget class="QPushButton" name="btn51">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="4">
+      <widget class="QPushButton" name="btn12">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblFri">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>ج</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="lblThu">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>پ</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="5">
+      <widget class="QPushButton" name="btn01">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QPushButton" name="btn54">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPushButton" name="btn45">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="btn06">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="btn26">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QPushButton" name="btn33">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QPushButton" name="btn03">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QPushButton" name="btn24">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QPushButton" name="btn56">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <property name="text">
-     <string>خرداد</string>
-    </property>
+    <layout class="QHBoxLayout" name="HLayoutButtons">
+     <property name="spacing">
+      <number>20</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>انصراف</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnToday">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>امروز</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk">
+       <property name="font">
+        <font>
+         <family>B Nazanin</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="Persian" country="Iran"/>
+       </property>
+       <property name="text">
+        <string>تایید</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item>
-    <property name="text">
-     <string>تیر</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>مرداد</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>شهریور</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>مهر</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>آبان</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>آذر</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>دی</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>بهمن</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>اسفند</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QPushButton" name="btn00">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>80</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn01">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>80</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn50">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>280</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn26">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>160</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn12">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>120</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn21">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>160</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn20">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>160</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn25">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>160</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn43">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>240</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn04">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>80</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn46">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>240</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn13">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>120</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn33">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>200</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn55">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>280</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn15">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>120</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn45">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>240</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn56">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>280</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn02">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>80</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn24">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>160</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn44">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>240</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn53">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>280</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn16">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>120</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn41">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>240</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn05">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>80</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn35">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>200</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn03">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>80</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn10">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>120</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn23">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>160</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn36">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>200</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn32">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>200</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn30">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>200</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn11">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>120</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn06">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>80</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn42">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>240</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn34">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>200</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn52">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>280</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn22">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>160</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn31">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>200</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn51">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>280</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn54">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>280</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn40">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>240</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn14">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>120</y>
-     <width>40</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>40</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnOk">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>330</y>
-     <width>80</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>80</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>80</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>تایید</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnToday">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>330</y>
-     <width>80</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>80</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>80</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>امروز</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-   <property name="default">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnCancel">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>330</y>
-     <width>80</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>80</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>80</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>انصراف</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblSat">
-   <property name="geometry">
-    <rect>
-     <x>257</x>
-     <y>50</y>
-     <width>25</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>ش</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblSun">
-   <property name="geometry">
-    <rect>
-     <x>217</x>
-     <y>50</y>
-     <width>25</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>ی</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblMon">
-   <property name="geometry">
-    <rect>
-     <x>177</x>
-     <y>50</y>
-     <width>25</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>د</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblTue">
-   <property name="geometry">
-    <rect>
-     <x>137</x>
-     <y>50</y>
-     <width>25</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>س</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblWed">
-   <property name="geometry">
-    <rect>
-     <x>97</x>
-     <y>50</y>
-     <width>25</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>چ</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblThu">
-   <property name="geometry">
-    <rect>
-     <x>57</x>
-     <y>50</y>
-     <width>25</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>پ</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblFri">
-   <property name="geometry">
-    <rect>
-     <x>17</x>
-     <y>50</y>
-     <width>25</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>25</width>
-     <height>25</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>ج</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnNextMonth">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>50</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>50</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>50</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="palette">
-    <palette>
-     <active>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>255</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </active>
-     <inactive>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>255</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </inactive>
-     <disabled>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>120</red>
-         <green>120</green>
-         <blue>120</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </disabled>
-    </palette>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-     <underline>true</underline>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>ماه بعد</string>
-   </property>
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-   <property name="flat">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnPrevMonth">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>10</y>
-     <width>50</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>50</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>50</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="palette">
-    <palette>
-     <active>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>255</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </active>
-     <inactive>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>255</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </inactive>
-     <disabled>
-      <colorrole role="ButtonText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>120</red>
-         <green>120</green>
-         <blue>120</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </disabled>
-    </palette>
-   </property>
-   <property name="font">
-    <font>
-     <family>B Nazanin</family>
-     <pointsize>12</pointsize>
-     <underline>true</underline>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="locale">
-    <locale language="Persian" country="Iran"/>
-   </property>
-   <property name="text">
-    <string>ماه قبل</string>
-   </property>
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-   <property name="flat">
-    <bool>true</bool>
-   </property>
-  </widget>
+  </layout>
  </widget>
  <resources>
   <include location="resource.qrc"/>
