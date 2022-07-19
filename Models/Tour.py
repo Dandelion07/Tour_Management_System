@@ -1,4 +1,7 @@
-from typing import List
+from typing import List, Tuple
+
+from pyodbc import Row
+
 from Models.DatabaseManager import DatabaseManager
 from datetime import datetime
 
@@ -65,7 +68,8 @@ class Tour:
                 destination, origin, departTime, departTime, returnTime, returnTime
             )
             return cursor.fetchval() > 0
-        except:
+        except Exception as e:
+            print(e)
             return False
 
     @classmethod
@@ -111,3 +115,33 @@ class Tour:
         )
         destinations = list(map(lambda row: row.Destination, cursor.fetchall()))
         return destinations
+
+    @classmethod
+    def SearchTours(cls, destination: str = None, origin: str = None, capacity: int = None, fromTime: datetime = None, toTime: datetime = None, status: str = None) -> List[Row]:
+        queryString = """SELECT [Id], [Destination], [Origin], [Capacity], [DepartTime], [ReturnTime], [Status], [Passengers], [Cars]  FROM [TourTBL] """
+        conditions = list()
+        params = list()
+        if destination is not None:
+            conditions.append(f"[Destination] LIKE N'%?%'")
+            params.append(destination)
+        if origin is not None:
+            conditions.append(f"[Origin] LIKE N'%?%'")
+            params.append(origin)
+        if capacity is not None:
+            conditions.append(f"[Capacity] = ?")
+            params.append(capacity)
+        if fromTime is not None:
+            conditions.append(f"([DepartTime] >= ? OR [ReturnTime) >= ?")
+            params.append(fromTime)
+            params.append(fromTime)
+        if toTime is not None:
+            conditions.append(f"([DepartTime] <= ? OR [ReturnTime) <= ?")
+            params.append(toTime)
+            params.append(toTime)
+        if status is not None:
+            conditions.append(f"[Status] = ?")
+            params.append(status)
+        if len(conditions) > 0:
+            queryString += "WHERE " + ' AND '.join(conditions)
+        cursor = DatabaseManager.query(queryString, *params)
+        return cursor.fetchall()

@@ -2,6 +2,7 @@ from PyQt5.QtCore import QLocale, Qt, QTimer
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QMainWindow, QLabel, QDialog, QSpacerItem
 from Models.Account import AccessLevel
+from UI.DeleteTourDialog import DeleteTourDialog
 from UI.Ui_MainWindow import Ui_MainWindow
 from UI.MessageDialog import MessageDialog, MessageDialogType
 from UI.CreateTourDialog import CreateTourDialog
@@ -47,6 +48,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.AboutAction.triggered.connect(self.OnAboutClicked)
 
         self.btnNewTour.clicked.connect(self.OnCreateNewTourClicked)
+        self.btnDeleteTour.clicked.connect(self.OnDeleteTourClicked)
 
     def CheckRole(self) -> None:
         self.AddUserAction.setEnabled(self.accessLevel.addUser)
@@ -73,13 +75,14 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.close()
 
     def OnAboutClicked(self):
-        message = 'سیستم مدیریت اردوهای مرکز فرهنگی' + '\t' + 'تهیه کننده: پریسا سادات عمادی' + '\t' + 'سال 1401'
+        message = 'سیستم مدیریت اردوهای مرکز فرهنگی' + '\n' + 'تهیه کننده: پریسا سادات عمادی' + '\n' + 'سال 1401'
         MessageDialog(message, 'درباره برنامه', MessageDialogType.INFO).exec()
 
-    def OnCreateNewTourClicked(self):
+    def OnCreateNewTourClicked(self) -> None:
         res = CreateTourDialog(self).exec()
         if res == QDialog.Accepted:
-            self.ShowStatusBarMessage('اردوی جدید ایجاد شد', 5000)
+            self.ShowStatusBarMessage('اردوی جدید ایجاد شد', 3000)
+            MessageDialog('اردوی جدید با موفقیت ایجاد شد.', 'پیام', MessageDialogType.INFO, self).exec()
 
     def OnTimerTicked(self):
         try:
@@ -92,3 +95,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.timer.stop()
         self.statusBar.showMessage(message, msecs)
         self.statusBar.messageChanged.connect(self.timer.start)
+
+    def OnDeleteTourClicked(self) -> None:
+        res = DeleteTourDialog(self).exec()
+        if res == QDialog.Accepted:
+            self.ShowStatusBarMessage('اردو با موفقیت حذف شد.', 3000)
+            MessageDialog('اردو با موفقیت حذف شد.', 'پیام', MessageDialogType.INFO, self).exec()

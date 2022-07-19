@@ -1,5 +1,4 @@
 import jdatetime
-
 from UI.Ui_CreateTourDialog import Ui_CreateTourDialog
 from PyQt5.QtWidgets import QDialog, QMainWindow
 from UI.DatePicker import DatePicker
@@ -13,11 +12,11 @@ class CreateTourDialog(Ui_CreateTourDialog, QDialog):
         self.setupUi(self)
         self.lblError.setVisible(False)
 
-        self.origin = None
-        self.destination = None
-        self.capacity = None
-        self.departDateTime = None
-        self.returnDateTime = None
+        self.origin: str = None
+        self.destination: str = None
+        self.capacity: int = None
+        self.departDateTime: jdatetime.datetime = None
+        self.returnDateTime: jdatetime.datetime = None
 
         # TODO: Change to connect to sql
         # origins = Tour.GetOrigins()
@@ -50,10 +49,9 @@ class CreateTourDialog(Ui_CreateTourDialog, QDialog):
         self.lblError.setVisible(False)
         if not self.ValidateInputs():
             return
-        if Tour.hasTourInterference(self.destination, self.origin, self.departDateTime, self.returnDateTime):
+        if Tour.hasTourInterference(self.destination, self.origin, self.departDateTime.togregorian(), self.returnDateTime.togregorian()):
             return
-        # TODO: Check for jalali dates
-        if Tour.CreateTour(self.destination, self.origin, self.capacity, self.departDateTime, self.returnDateTime):
+        if Tour.CreateTour(self.destination, self.origin, self.capacity, self.departDateTime.togregorian(), self.returnDateTime.togregorian()):
             self.accept()
 
     def ValidateInputs(self) -> bool:
