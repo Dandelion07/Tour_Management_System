@@ -1,3 +1,4 @@
+from typing import List
 from Models.DatabaseManager import DatabaseManager
 from datetime import datetime
 
@@ -94,3 +95,19 @@ class Tour:
             return cursor.fetchval() > 0
         except:
             return False
+
+    @classmethod
+    def GetOrigins(cls) -> List[str]:
+        cursor = DatabaseManager.query(
+            """SELECT [Origin] FROM [TourTBL] GROUP BY [Origin] ORDER BY COUNT([Origin]) DESC"""
+        )
+        origins = list(map(lambda row: row.Origin, cursor.fetchall()))
+        return origins
+
+    @classmethod
+    def GetDestinations(cls) -> List[str]:
+        cursor = DatabaseManager.query(
+            """SELECT [Destination] FROM [TourTBL] GROUP BY [Destination] ORDER BY COUNT([Destination]) DESC"""
+        )
+        destinations = list(map(lambda row: row.Destination, cursor.fetchall()))
+        return destinations

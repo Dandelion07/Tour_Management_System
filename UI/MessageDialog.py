@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QIcon, QPixmap, QCloseEvent
 from PyQt5.QtWidgets import QDialog
-from Ui_MessageDialog import Ui_MessageDialog
+from UI.Ui_MessageDialog import Ui_MessageDialog
 
 
 class MessageDialogType:

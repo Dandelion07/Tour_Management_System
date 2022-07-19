@@ -54,6 +54,6 @@ class LoginDialog(Ui_LoginDialog, QDialog):
     def closeEvent(self, a0: QCloseEvent) -> None:
         self.reject()
 
-    def exec(self) -> List[Union[int, str]]:
+    def exec(self) -> List[Union[int, str, AccessLevel]]:
         res = super(LoginDialog, self).exec()
-        return [res, self.username]
+        return [res, self.username, self.accessLevel]

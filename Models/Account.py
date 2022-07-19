@@ -8,9 +8,7 @@ class AccessLevel:
     MANAGER = 1
     USER = 2
 
-    def __init__(self, createTour: bool = False, deleteTour: bool = False, confirmTour: bool = False,
-                 registerPassenger: bool = False,
-                 modifyPassenger: bool = False, cancelRegistration: bool = False, reserveCars: bool = False):
+    def __init__(self, createTour: bool = False, deleteTour: bool = False, confirmTour: bool = False, registerPassenger: bool = False, modifyPassenger: bool = False, cancelRegistration: bool = False, reserveCars: bool = False, addUser: bool = False, deleteUser: bool = False):
         self.createTour = createTour
         self.deleteTour = deleteTour
         self.confirmTour = confirmTour
@@ -19,13 +17,16 @@ class AccessLevel:
         self.cancelRegistration = cancelRegistration
         self.reserveCars = reserveCars
 
+        self.addUser = addUser
+        self.deleteUser = deleteUser
+
 
 class Account:
     @classmethod
     def SignIn(cls, username: str, password: str, role: int) -> List[Union[Optional[str], Optional[AccessLevel]]]:
         pass_hash = sha256(password.encode()).hexdigest()
         cursor = DatabaseManager.query(
-            """SELECT u.[Username], u.[Password], a.[CreateTour], a.[DeleteTour], a.[ConfirmTour], a.[RegisterPassenger], a.[ModifyPassenger], a.[CancelRegistration], a.[ReserveCars]
+            """SELECT u.[Username], u.[Password], a.[CreateTour], a.[DeleteTour], a.[ConfirmTour], a.[RegisterPassenger], a.[ModifyPassenger], a.[CancelRegistration], a.[ReserveCars], a.[AddUser], a.[DeleteUser]
             FROM [UserTBL] AS u
             INNER JOIN [AccessTBL] AS a
             ON u.[AccessLevel] = a.[Id]
@@ -36,7 +37,7 @@ class Account:
             return [None, None]
         user = login[0]
         access_level = AccessLevel(user.CreateTour, user.DeleteTour, user.ConfirmTour, user.RegisterPassenger,
-                                   user.ModifyPassenger, user.CancelRegistration, user.ReserveCars)
+                                   user.ModifyPassenger, user.CancelRegistration, user.ReserveCars, user.AddUser, user.DeleteUser)
         return [username, access_level]
 
     @classmethod
@@ -65,8 +66,8 @@ class Account:
     @classmethod
     def TestSignIn(cls, username: str, password: str, role: int) -> List[Union[Optional[str], Optional[AccessLevel]]]:
         if username == 'admin' and password == 'admin' and role == AccessLevel.MANAGER:
-            return [username, AccessLevel(True, True, True, False, False, False, False)]
+            return [username, AccessLevel(True, True, True, False, False, False, False, True, True)]
         if username == 'user' and password == 'user' and role == AccessLevel.USER:
-            return [username, AccessLevel(True, True, False, True, True, True, True)]
+            return [username, AccessLevel(True, True, False, True, True, True, True, False, False)]
         else:
             return [None, None]

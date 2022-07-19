@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>542</width>
+    <height>406</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>B Nazanin</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>نرم‌افزار مدیریت اردوها</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/icons/resources/icons/icon.png</normaloff>:/icons/resources/icons/icon.png</iconset>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::RightToLeft</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="VLayoutMain">
+    <property name="spacing">
+     <number>10</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <property name="leftMargin">
+     <number>10</number>
+    </property>
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
+    <property name="bottomMargin">
+     <number>10</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="lblWelcome">
+      <property name="locale">
+       <locale language="Persian" country="Iran"/>
+      </property>
+      <property name="text">
+       <string>به سیستم مدیریت اردوها خوش آمدید</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="grpTourManagement">
+      <property name="title">
+       <string>مدیریت اردوها</string>
+      </property>
+      <layout class="QHBoxLayout" name="HLayoutTours">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="btnNewTour">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>اردوی جدید</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/addTour.png</normaloff>:/icons/resources/icons/addTour.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnDeleteTour">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>حذف اردو</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/deleteTour.png</normaloff>:/icons/resources/icons/deleteTour.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnConfirmTour">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>تایید اردوها</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/confirmTour.png</normaloff>:/icons/resources/icons/confirmTour.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnAssignCars">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>هماهنگی سرویس‌ها</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/icon.png</normaloff>:/icons/resources/icons/icon.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="grpPassengers">
+      <property name="title">
+       <string>مدیریت مسافران</string>
+      </property>
+      <layout class="QHBoxLayout" name="HLayoutPassengers">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="btnRegisterPassenger">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>ثبت نام مسافران</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/registerPassenger.png</normaloff>:/icons/resources/icons/registerPassenger.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnEditRegistration">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>ویرایش ثبت نام</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/editRegistration.png</normaloff>:/icons/resources/icons/editRegistration.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCancelRegistration">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>انصراف از اردو</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/cancelRegistration.png</normaloff>:/icons/resources/icons/cancelRegistration.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="grpPassengers_2">
+      <property name="title">
+       <string>گزارش‌گیری</string>
+      </property>
+      <layout class="QHBoxLayout" name="HLayoutReports">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="btnSearchTours">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>جست‌وجوی اردوها</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/searchTour.png</normaloff>:/icons/resources/icons/searchTour.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSearchPassengers">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>جست‌وجوی مسافران</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/searchPassenger.png</normaloff>:/icons/resources/icons/searchPassenger.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>542</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="locale">
+    <locale language="Persian" country="Iran"/>
+   </property>
+   <widget class="QMenu" name="AccountManagementMenu">
+    <property name="font">
+     <font>
+      <family>B Nazanin</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="locale">
+     <locale language="Persian" country="Iran"/>
+    </property>
+    <property name="title">
+     <string>مدیریت حساب کاربری</string>
+    </property>
+    <addaction name="AddUserAction"/>
+    <addaction name="DeleteUserAction"/>
+    <addaction name="ChangePasswordAction"/>
+    <addaction name="separator"/>
+    <addaction name="SignOutAction"/>
+    <addaction name="ExitAction"/>
+   </widget>
+   <widget class="QMenu" name="HelpMenu">
+    <property name="font">
+     <font>
+      <family>B Nazanin</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>راهنما</string>
+    </property>
+    <addaction name="AboutAction"/>
+   </widget>
+   <addaction name="AccountManagementMenu"/>
+   <addaction name="HelpMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="locale">
+    <locale language="Persian" country="Iran"/>
+   </property>
+  </widget>
+  <action name="AddUserAction">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/resources/icons/addUser.png</normaloff>:/icons/resources/icons/addUser.png</iconset>
+   </property>
+   <property name="text">
+    <string>افزودن کارشناس جدید</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>B Nazanin</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="DeleteUserAction">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/resources/icons/deleteUser.png</normaloff>:/icons/resources/icons/deleteUser.png</iconset>
+   </property>
+   <property name="text">
+    <string>حذف کارشناس</string>
+   </property>
+  </action>
+  <action name="ChangePasswordAction">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/resources/icons/changePassword.png</normaloff>:/icons/resources/icons/changePassword.png</iconset>
+   </property>
+   <property name="text">
+    <string>تغییر نام کاربری یا گذرواژه</string>
+   </property>
+  </action>
+  <action name="SignOutAction">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/resources/icons/signOut.png</normaloff>:/icons/resources/icons/signOut.png</iconset>
+   </property>
+   <property name="text">
+    <string>خروج از حساب کاربری</string>
+   </property>
+  </action>
+  <action name="ExitAction">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/resources/icons/exit.png</normaloff>:/icons/resources/icons/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>خروج از برنامه</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>B Nazanin</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="AboutAction">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/resources/icons/about.png</normaloff>:/icons/resources/icons/about.png</iconset>
+   </property>
+   <property name="text">
+    <string>درباره برنامه</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>B Nazanin</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,5 +1,21 @@
 <RCC>
   <qresource prefix="icons">
+    <file>resources/icons/calendar.png</file>
+    <file>resources/icons/searchPassenger.png</file>
+    <file>resources/icons/searchTour.png</file>
+    <file>resources/icons/cancelRegistration.png</file>
+    <file>resources/icons/editRegistration.png</file>
+    <file>resources/icons/registerPassenger.png</file>
+    <file>resources/icons/addTour.png</file>
+    <file>resources/icons/confirmTour.png</file>
+    <file>resources/icons/deleteTour.png</file>
+    <file>resources/icons/about.png</file>
+    <file>resources/icons/exit.png</file>
+    <file>resources/icons/signOut.png</file>
+    <file>resources/icons/changePassword.png</file>
+    <file>resources/icons/account.png</file>
+    <file>resources/icons/addUser.png</file>
+    <file>resources/icons/deleteUser.png</file>
     <file>resources/icons/return.png</file>
     <file>resources/icons/signIn.png</file>
     <file>resources/icons/manager.png</file>
