@@ -49,25 +49,25 @@ class Tour:
             return False
 
     @classmethod
-    def DeleteTour(cls, Id: int) -> bool:
-        # TODO Change tour status instead of deleting the tour
+    def DeleteTours(cls, Id: List[int]) -> bool:
         try:
             cursor = DatabaseManager.execute(
-                """DELETE FROM [TourTBL] WHERE [Id] = ?""", Id
+                """UPDATE [TourTBL] SET [Status] = ? WHERE [Id] IN ?""",
+                TourStatus.Canceled, Id
             )
-            return cursor.rowcount == 1
+            return cursor.rowcount == len(Id)
         except:
             return False
 
     @classmethod
     def hasTourInterference(cls, destination: str, origin: str, departTime: datetime, returnTime: datetime) -> bool:
         try:
-            cursor = DatabaseManager.query(
+            cursor = DatabaseManager.execute(
                 """SELECT COUNT(*) FROM [TourTBL] 
                 WHERE [Destination] = ? AND [Origin] = ? AND (([DepartTime] <= ? AND [ReturnTime] >= ?) OR ([DepartTime] <= ? AND [ReturnTime] >= ?))""",
                 destination, origin, departTime, departTime, returnTime, returnTime
             )
-            return cursor.fetchval() > 0
+            return cursor.fetchone()[0] > 0
         except Exception as e:
             print(e)
             return False
@@ -75,7 +75,7 @@ class Tour:
     @classmethod
     def hasPassengerInterference(cls, passenger_id: str, departTime: datetime, returnTime: datetime) -> bool:
         try:
-            cursor = DatabaseManager.query(
+            cursor = DatabaseManager.execute(
                 """SELECT COUNT(value) 
                 FROM [TourTBL] 
                 CROSS APPLY STRING_SPLIT([Passengers], '-') 
@@ -89,7 +89,7 @@ class Tour:
     @classmethod
     def hasCarInterference(cls, car_id: int, departTime: datetime, returnTime: datetime) -> bool:
         try:
-            cursor = DatabaseManager.query(
+            cursor = DatabaseManager.execute(
                 """SELECT COUNT(value) 
                 FROM [TourTBL] 
                 CROSS APPLY STRING_SPLIT([Cars], '-') 
@@ -102,18 +102,18 @@ class Tour:
 
     @classmethod
     def GetOrigins(cls) -> List[str]:
-        cursor = DatabaseManager.query(
+        cursor = DatabaseManager.execute(
             """SELECT [Origin] FROM [TourTBL] GROUP BY [Origin] ORDER BY COUNT([Origin]) DESC"""
         )
-        origins = list(map(lambda row: row.Origin, cursor.fetchall()))
+        origins = list(map(lambda row: row[0], cursor.fetchall()))
         return origins
 
     @classmethod
     def GetDestinations(cls) -> List[str]:
-        cursor = DatabaseManager.query(
+        cursor = DatabaseManager.execute(
             """SELECT [Destination] FROM [TourTBL] GROUP BY [Destination] ORDER BY COUNT([Destination]) DESC"""
         )
-        destinations = list(map(lambda row: row.Destination, cursor.fetchall()))
+        destinations = list(map(lambda row: row[0], cursor.fetchall()))
         return destinations
 
     @classmethod
@@ -143,5 +143,5 @@ class Tour:
             params.append(status)
         if len(conditions) > 0:
             queryString += "WHERE " + ' AND '.join(conditions)
-        cursor = DatabaseManager.query(queryString, *params)
+        cursor = DatabaseManager.execute(queryString, *params)
         return cursor.fetchall()

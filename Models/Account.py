@@ -25,7 +25,7 @@ class Account:
     @classmethod
     def SignIn(cls, username: str, password: str, role: int) -> List[Union[Optional[str], Optional[AccessLevel]]]:
         pass_hash = sha256(password.encode()).hexdigest()
-        cursor = DatabaseManager.query(
+        cursor = DatabaseManager.execute(
             """SELECT u.[Username], u.[Password], a.[CreateTour], a.[DeleteTour], a.[ConfirmTour], a.[RegisterPassenger], a.[ModifyPassenger], a.[CancelRegistration], a.[ReserveCars], a.[AddUser], a.[DeleteUser]
             FROM [UserTBL] AS u
             INNER JOIN [AccessTBL] AS a
@@ -36,20 +36,19 @@ class Account:
         if len(login) != 1:
             return [None, None]
         user = login[0]
-        access_level = AccessLevel(user.CreateTour, user.DeleteTour, user.ConfirmTour, user.RegisterPassenger,
-                                   user.ModifyPassenger, user.CancelRegistration, user.ReserveCars, user.AddUser, user.DeleteUser)
+        access_level = AccessLevel(user["CreateTour"], user["DeleteTour"], user["ConfirmTour"], user["RegisterPassenger"], user["ModifyPassenger"], user["CancelRegistration"], user["ReserveCars"], user["AddUser"], user["DeleteUser"])
         return [username, access_level]
 
     @classmethod
     def SignUp(cls, username: str, password: str, access_level: int = AccessLevel.USER) -> bool:
         # Check if username exists
-        cursor = DatabaseManager.query("""SELECT [Username] FROM UserTBL WHERE [Username] = ?""", username)
+        cursor = DatabaseManager.execute("""SELECT [Username] FROM UserTBL WHERE [Username] = ?""", username)
         if len(cursor.fetchall()) > 0:
             return False
 
         pass_hash = sha256(password.encode()).hexdigest()
         cursor = DatabaseManager.execute(
-            """INSERT INTO UserTBL ([Username], [Password], [AccessLevel])
+            """INSERT INTO [UserTBL] ([Username], [Password], [AccessLevel])
             VALUES 
             (?, ?, ?)""",
             username, pass_hash, access_level

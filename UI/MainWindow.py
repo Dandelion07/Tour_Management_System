@@ -97,7 +97,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.statusBar.messageChanged.connect(self.timer.start)
 
     def OnDeleteTourClicked(self) -> None:
-        res = DeleteTourDialog(self).exec()
+        try:
+            res = DeleteTourDialog(self).exec()
+        except Exception as e:
+            print(e)
         if res == QDialog.Accepted:
             self.ShowStatusBarMessage('اردو با موفقیت حذف شد.', 3000)
             MessageDialog('اردو با موفقیت حذف شد.', 'پیام', MessageDialogType.INFO, self).exec()

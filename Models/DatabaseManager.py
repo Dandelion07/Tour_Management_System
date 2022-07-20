@@ -1,30 +1,22 @@
-import pyodbc
+from typing import List
+import sqlite3
 
 
 class DatabaseManager:
-    connection = None
-    DRIVER = 'SQL SERVER'
+    connection: sqlite3.Connection = None
+    DRIVER = 'SQLite3 ODBC Driver'
     SERVER = 'localhost'
     DATABASE_NAME = 'tourDB'
 
     @classmethod
-    def get_connection(cls) -> pyodbc.Connection:
+    def get_connection(cls) -> sqlite3.Connection:
         if cls.connection is None:
-            cls.connection = pyodbc.connect("Driver={SQL SERVER};"
-                                            "Server=localhost;"
-                                            "Database=tourDB;"
-                                            "Trusted_Connection=yes;")
+            cls.connection = sqlite3.connect('tourDB.db', detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
+            cls.connection.row_factory = sqlite3.Row
         return cls.connection
 
     @classmethod
-    def query(cls, query_string: str, *params: [object]) -> pyodbc.Cursor:
+    def execute(cls, query_string: str, *params: object) -> sqlite3.Cursor:
         cursor = cls.get_connection().cursor()
         cursor.execute(query_string, params)
-        return cursor
-
-    @classmethod
-    def execute(cls, query_string: str, *params) -> pyodbc.Cursor:
-        cursor = cls.get_connection().cursor()
-        cursor.execute(query_string, params)
-        cursor.commit()
         return cursor

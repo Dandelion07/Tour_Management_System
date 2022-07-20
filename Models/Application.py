@@ -1,7 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QDialog
 from typing import List, Optional
-
 from Models.Account import AccessLevel
 from UI.LoginDialog import LoginDialog
 from UI.SelectRoleDialog import SelectRoleDialog

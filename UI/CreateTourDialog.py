@@ -19,13 +19,13 @@ class CreateTourDialog(Ui_CreateTourDialog, QDialog):
         self.returnDateTime: jdatetime.datetime = None
 
         # TODO: Change to connect to sql
-        # origins = Tour.GetOrigins()
-        origins = ['میدان قدس', 'میدان احمدآباد', 'پایانه باقوشخانه']
+        origins = Tour.GetOrigins()
+        # origins = ['میدان قدس', 'میدان احمدآباد', 'پایانه باقوشخانه']
         self.cmbOrigin.addItems(origins)
 
         # TODO: Change to connect to sql
-        # destinations = Tour.GetDestinations()
-        destinations = ['آبشار پونه زار', 'غار نخجیر', 'مارکده']
+        destinations = Tour.GetDestinations()
+        # destinations = ['آبشار پونه زار', 'غار نخجیر', 'مارکده']
         self.cmbDestination.addItems(destinations)
 
         self.btnDepartDatePicker.clicked.connect(self.OnSelectDepartDateClicked)
@@ -50,6 +50,8 @@ class CreateTourDialog(Ui_CreateTourDialog, QDialog):
         if not self.ValidateInputs():
             return
         if Tour.hasTourInterference(self.destination, self.origin, self.departDateTime.togregorian(), self.returnDateTime.togregorian()):
+            self.lblError.setVisible(True)
+            self.lblError.setText('در این تاریخ یک اردوی مشابه ثبت شده است.')
             return
         if Tour.CreateTour(self.destination, self.origin, self.capacity, self.departDateTime.togregorian(), self.returnDateTime.togregorian()):
             self.accept()

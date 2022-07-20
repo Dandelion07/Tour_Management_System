@@ -1,4 +1,5 @@
-from Models.Tour import Tour
-from datetime import datetime
+from DatabaseManager import DatabaseManager
+from Account import Account, AccessLevel
 
-print(Tour.hasCarInterference(2, datetime(2020, 5, 4), datetime(2020, 5, 6)))
+res = Account.SignIn('user', 'user', 2)
+print(res)

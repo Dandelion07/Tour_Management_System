@@ -12,7 +12,7 @@ class Passenger:
     @classmethod
     def CheckExists(cls, Id: str) -> bool:
         try:
-            cursor = DatabaseManager.query("""SELECT [Id] FROM [PassengerTBL] WHERE [Id] = ?""", Id)
+            cursor = DatabaseManager.execute("""SELECT [Id] FROM [PassengerTBL] WHERE [Id] = ?""", Id)
             return len(cursor.fetchall()) == 1
         except:
             return False
