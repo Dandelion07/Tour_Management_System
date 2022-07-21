@@ -1,6 +1,5 @@
 import re
 import jdatetime
-import pyodbc
 from PyQt5.QtWidgets import QDialog, QMainWindow, QTableWidgetItem
 from Models.Tour import TourStatus, Tour
 from UI.Ui_DeleteTourDialog import Ui_DeleteTourDialog
@@ -14,8 +13,8 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
 
         self.cmbStatus.addItems([TourStatus.NotConfirmed, TourStatus.Registering, TourStatus.FullCapacity])
 
-        self.cmbOrigin.addItems([row.Origin for row in Tour.GetOrigins()])
-        self.cmbDestination.addItems([row.Destination for row in Tour.GetDestinations()])
+        self.cmbOrigin.addItems(Tour.GetOrigins())
+        self.cmbDestination.addItems(Tour.GetDestinations())
 
         self.btnReturn.clicked.connect(lambda: self.reject())
         self.btnDelete.clicked.connect(self.OnDeleteClicked)
@@ -63,27 +62,30 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
         return True
 
     def OnSearchClicked(self) -> None:
-        self.lblError.setVisible(False)
-        if not self.ValidateInputs():
-            return
-        tours = Tour.SearchTours(self.destination, self.origin, None, self.fromDate, self.toDate, self.status)
-        if len(tours) == 0:
-            self.lblError.setVisible(True)
-            self.lblError.setText('اردویی با این مشخصات یافت نشد.')
-            return
+        try:
+            self.lblError.setVisible(False)
+            if not self.ValidateInputs():
+                return
+            tours = Tour.SearchTours(self.destination, self.origin, None, self.fromDate, self.toDate, self.status, True, False)
+            if len(tours) == 0:
+                self.lblError.setVisible(True)
+                self.lblError.setText('اردویی با این مشخصات یافت نشد.')
+                return
 
-        self.tblTours.setRowCount(0)
-        for row in tours:
-            rowCount = self.tblTours.rowCount()
-            self.tblTours.setRowCount(rowCount + 1)
-            self.tblTours.setItem(rowCount, 0, QTableWidgetItem(row.Id))
-            self.tblTours.setItem(rowCount, 1, QTableWidgetItem(row.Origin))
-            self.tblTours.setItem(rowCount, 2, QTableWidgetItem(row.Destination))
-            self.tblTours.setItem(rowCount, 3, QTableWidgetItem(row.Capacity))
-            self.tblTours.setItem(rowCount, 4, QTableWidgetItem(row.DepartTime))
-            self.tblTours.setItem(rowCount, 5, QTableWidgetItem(row.ReturnTime))
-            self.tblTours.setItem(rowCount, 6, QTableWidgetItem(row.Status))
-            self.tblTours.setItem(rowCount, 7, QTableWidgetItem(len(row.Passengers.split('-'))))
+            self.tblTours.setRowCount(0)
+            for row in tours:
+                rowCount = self.tblTours.rowCount()
+                self.tblTours.setRowCount(rowCount + 1)
+                self.tblTours.setItem(rowCount, 0, QTableWidgetItem(str(row["Id"])))
+                self.tblTours.setItem(rowCount, 1, QTableWidgetItem(row["Origin"]))
+                self.tblTours.setItem(rowCount, 2, QTableWidgetItem(row["Destination"]))
+                self.tblTours.setItem(rowCount, 3, QTableWidgetItem(str(row["Capacity"])))
+                self.tblTours.setItem(rowCount, 4, QTableWidgetItem(row["DepartTime"]))
+                self.tblTours.setItem(rowCount, 5, QTableWidgetItem(row["ReturnTime"]))
+                self.tblTours.setItem(rowCount, 6, QTableWidgetItem(row["Status"]))
+                self.tblTours.setItem(rowCount, 7, QTableWidgetItem(str(len(row["Passengers"].split('-')))))
+        except Exception as e:
+            print(e)
 
     def OnDeleteClicked(self) -> None:
         self.lblError.setVisible(False)
@@ -92,7 +94,7 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
             self.lblError.setVisible(True)
             self.lblError.setText('هیچ اردویی انتخاب نشده است.')
             return
-        res = Tour.DeleteTours([row.model().itemData(0) for row in rows])
+        res = Tour.DeleteTours([row.model().itemData(0) for row in rows])  # TODO: Check getting tour ids from table
         if not res:
             self.lblError.setVisible(True)
             self.lblError.setText('مشکلی در حذف اردوها به وجود آمده است.')

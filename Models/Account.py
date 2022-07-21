@@ -1,5 +1,4 @@
 from typing import List, Union, Optional
-
 from Models.DatabaseManager import DatabaseManager
 from hashlib import sha256
 
@@ -16,7 +15,6 @@ class AccessLevel:
         self.modifyPassenger = modifyPassenger
         self.cancelRegistration = cancelRegistration
         self.reserveCars = reserveCars
-
         self.addUser = addUser
         self.deleteUser = deleteUser
 
@@ -56,7 +54,7 @@ class Account:
         return True
 
     @classmethod
-    def DeleteUser(cls, username):
+    def DeleteUser(cls, username: str) -> bool:
         cursor = DatabaseManager.execute("""DELETE FROM [UserTBL] WHERE [Username] = ?""", username)
         if cursor.rowcount == 0:
             return False

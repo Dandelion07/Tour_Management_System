@@ -42,9 +42,7 @@ class LoginDialog(Ui_LoginDialog, QDialog):
             self.lblError.setVisible(True)
             return
         self.lblError.setVisible(False)
-        # TODO: Login user
         self.username, self.accessLevel = Account.SignIn(self.txtUsername.text().strip(), self.txtPassword.text().strip(), self.role)
-        # self.username, self.accessLevel = Account.TestSignIn(self.txtUsername.text().strip(), self.txtPassword.text().strip(), self.role)
         if self.username is not None:
             self.accept()
         else:

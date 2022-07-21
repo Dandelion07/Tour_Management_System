@@ -1,3 +1,5 @@
+from typing import Optional
+
 from Models.DatabaseManager import DatabaseManager
 
 
@@ -57,5 +59,12 @@ class Passenger:
             return False
 
     @classmethod
-    def GetPassengerById(cls):
-        pass
+    def GetPassengerById(cls, Id: str) -> Optional['Passenger']:
+        cursor = DatabaseManager.execute(
+            """SELECT [Id], [Name], [Family], [FatherName], [Phone] FROM [PassengerTBL]
+            WHERE [Id] = ?""", Id)
+        p = cursor.fetchall()
+        if len(p) != 1:
+            return None
+        p = p[0]
+        return Passenger(p["Id"], p["Name"], p["Family"], p["FatherName"], p["Phone"])

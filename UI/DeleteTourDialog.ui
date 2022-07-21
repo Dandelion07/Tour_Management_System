@@ -30,7 +30,7 @@
     <number>10</number>
    </property>
    <property name="sizeConstraint">
-    <enum>QLayout::SetFixedSize</enum>
+    <enum>QLayout::SetDefaultConstraint</enum>
    </property>
    <property name="leftMargin">
     <number>10</number>
@@ -46,6 +46,9 @@
    </property>
    <item>
     <layout class="QFormLayout" name="FLayoutSearchFields">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="lblStatus">
        <property name="text">
@@ -180,7 +183,7 @@
    <item>
     <widget class="QTableWidget" name="tblTours">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -195,7 +198,7 @@
       <enum>Qt::ScrollBarAsNeeded</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
      </property>
      <property name="alternatingRowColors">
       <bool>true</bool>

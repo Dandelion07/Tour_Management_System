@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QLocale, Qt, QTimer
 from PyQt5.QtGui import QCloseEvent
-from PyQt5.QtWidgets import QMainWindow, QLabel, QDialog, QSpacerItem
+from PyQt5.QtWidgets import QMainWindow, QLabel, QDialog
 from Models.Account import AccessLevel
 from UI.DeleteTourDialog import DeleteTourDialog
 from UI.Ui_MainWindow import Ui_MainWindow
@@ -24,6 +24,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.accessLevel = accessLevel
         self.role = role
         self.CheckRole()
+        self.statusBar.showMessage(jdatetime.datetime.now().isoformat(' ', 'seconds'))
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.OnTimerTicked)
         self.timer.setInterval(1000)
@@ -97,10 +98,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.statusBar.messageChanged.connect(self.timer.start)
 
     def OnDeleteTourClicked(self) -> None:
-        try:
-            res = DeleteTourDialog(self).exec()
-        except Exception as e:
-            print(e)
+        res = DeleteTourDialog(self).exec()
         if res == QDialog.Accepted:
             self.ShowStatusBarMessage('اردو با موفقیت حذف شد.', 3000)
             MessageDialog('اردو با موفقیت حذف شد.', 'پیام', MessageDialogType.INFO, self).exec()

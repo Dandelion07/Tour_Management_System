@@ -18,14 +18,10 @@ class CreateTourDialog(Ui_CreateTourDialog, QDialog):
         self.departDateTime: jdatetime.datetime = None
         self.returnDateTime: jdatetime.datetime = None
 
-        # TODO: Change to connect to sql
         origins = Tour.GetOrigins()
-        # origins = ['میدان قدس', 'میدان احمدآباد', 'پایانه باقوشخانه']
         self.cmbOrigin.addItems(origins)
 
-        # TODO: Change to connect to sql
         destinations = Tour.GetDestinations()
-        # destinations = ['آبشار پونه زار', 'غار نخجیر', 'مارکده']
         self.cmbDestination.addItems(destinations)
 
         self.btnDepartDatePicker.clicked.connect(self.OnSelectDepartDateClicked)
@@ -39,11 +35,13 @@ class CreateTourDialog(Ui_CreateTourDialog, QDialog):
 
     def OnSelectDepartDateClicked(self):
         date = self.ShowDatePicker()
-        self.txtDepartDate.setText(str(date))
+        if date is not None:
+            self.txtDepartDate.setText(str(date))
 
     def OnSelectReturnDateClicked(self):
         date = self.ShowDatePicker()
-        self.txtReturnDate.setText(str(date))
+        if date is not None:
+            self.txtReturnDate.setText(str(date))
 
     def OnCreateClicked(self) -> None:
         self.lblError.setVisible(False)
@@ -95,7 +93,7 @@ class CreateTourDialog(Ui_CreateTourDialog, QDialog):
             return False
         if self.departDateTime <= jdatetime.datetime.now():
             self.lblError.setVisible(True)
-            self.lblError.setText('تاریخ رفت نمی تواند زودتر از امروز باشد')
+            self.lblError.setText('تاریخ و زمان رفت نمی تواند زودتر از زمان کنونی باشد')
             return False
 
         match = re.match(datePattern, self.txtReturnDate.text())

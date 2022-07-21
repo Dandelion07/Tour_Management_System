@@ -7,17 +7,16 @@ from datetime import datetime
 
 
 class TourStatus:
-    NotConfirmed = 'تاييد نشده'
+    NotConfirmed = 'تایید نشده'
     Registering = 'در حال ثبت نام'
-    FullCapacity = 'تکميل ظرفيت'
+    FullCapacity = 'تکمیل ظرفیت'
     Ended = 'برگزار شده'
     Canceled = 'حذف شده'
 
 
 class Tour:
-    def __init__(self, id: int, destination: str, origin: str, capacity: int, departTime: str, returnTime: str,
-                 status: str, passengers: list = None, cars: list = None):
-        self.id = id
+    def __init__(self, Id: int, destination: str, origin: str, capacity: int, departTime: str, returnTime: str, status: str, passengers: list = None, cars: list = None):
+        self.id = Id
         self.destination = destination
         self.origin = origin
         self.capacity = capacity if capacity > 0 else 0
@@ -25,24 +24,24 @@ class Tour:
         self.returnTime = datetime.fromisoformat(returnTime)
         self.status = status
         self.passengers = list()
-
-        for p in passengers:
-            self.passengers.append(p)
+        if passengers is not None:
+            for p in passengers:
+                self.passengers.append(p)
 
         self.cars = list()
-        for c in cars:
-            self.cars.append(c)
+        if cars is not None:
+            for c in cars:
+                self.cars.append(c)
 
     @classmethod
-    def CreateTour(cls, destination: str, origin: str, capacity: int, departTime: datetime,
-                   returnTime: datetime) -> bool:
+    def CreateTour(cls, destination: str, origin: str, capacity: int, departTime: datetime, returnTime: datetime) -> bool:
         try:
             cursor = DatabaseManager.execute(
                 """INSERT INTO [TourTBL]
-                ([Destination], [Origin], [Capacity], [DepartTime], [ReturnTime], [Status], [Passengers], [Cars])
+                ([Destination], [Origin], [Capacity], [DepartTime], [ReturnTime], [Status])
                 VALUES 
-                (?, ?, ?, ?, ?, ?, ?, ?)""",
-                destination, origin, capacity, departTime, returnTime, TourStatus.NotConfirmed, '', ''
+                (?, ?, ?, ?, ?, ?)""",
+                destination, origin, capacity, departTime, returnTime, TourStatus.NotConfirmed
             )
             return cursor.rowcount == 1
         except:
@@ -68,21 +67,21 @@ class Tour:
                 destination, origin, departTime, departTime, returnTime, returnTime
             )
             return cursor.fetchone()[0] > 0
-        except Exception as e:
-            print(e)
+        except:
             return False
 
     @classmethod
     def hasPassengerInterference(cls, passenger_id: str, departTime: datetime, returnTime: datetime) -> bool:
         try:
             cursor = DatabaseManager.execute(
-                """SELECT COUNT(value) 
-                FROM [TourTBL] 
-                CROSS APPLY STRING_SPLIT([Passengers], '-') 
-                WHERE value = ? AND (([DepartTime] <= ? AND [ReturnTime] >= ?) OR ([DepartTime] <= ? AND [ReturnTime] >= ?))""",
+                """SELECT p.[PassengerId]
+                FROM [TourPassengersTBL] AS p
+                INNER JOIN [TourTBL] AS t
+                ON p.TourId = t.Id
+                WHERE p.[PassengerId] = ? AND ((t.[DepartTime] <= ? AND t.[ReturnTime] >= ?) OR (t.[DepartTime] <= ? AND t.[ReturnTime] >= ?))""",
                 passenger_id, departTime, departTime, returnTime, returnTime
             )
-            return cursor.fetchval() > 0
+            return len(cursor.fetchall()) > 0
         except:
             return False
 
@@ -90,13 +89,13 @@ class Tour:
     def hasCarInterference(cls, car_id: int, departTime: datetime, returnTime: datetime) -> bool:
         try:
             cursor = DatabaseManager.execute(
-                """SELECT COUNT(value) 
-                FROM [TourTBL] 
-                CROSS APPLY STRING_SPLIT([Cars], '-') 
-                WHERE value = ? AND (([DepartTime] <= ? AND [ReturnTime] >= ?) OR ([DepartTime] <= ? AND [ReturnTime] >= ?))""",
+                """SELECT c.[CarId]
+                FROM [TourCarsTBL] AS c
+                INNER JOIN [TourTBL] AS t on t.Id = c.TourId
+                WHERE c.[CarId] = ? AND (([DepartTime] <= ? AND [ReturnTime] >= ?) OR ([DepartTime] <= ? AND [ReturnTime] >= ?))""",
                 car_id, departTime, departTime, returnTime, returnTime
             )
-            return cursor.fetchval() > 0
+            return len(cursor.fetchall()) > 0
         except:
             return False
 
@@ -117,16 +116,26 @@ class Tour:
         return destinations
 
     @classmethod
-    def SearchTours(cls, destination: str = None, origin: str = None, capacity: int = None, fromTime: datetime = None, toTime: datetime = None, status: str = None) -> List[Row]:
-        queryString = """SELECT [Id], [Destination], [Origin], [Capacity], [DepartTime], [ReturnTime], [Status], [Passengers], [Cars]  FROM [TourTBL] """
+    def SearchTours(cls, destination: str = None, origin: str = None, capacity: int = None, fromTime: datetime = None, toTime: datetime = None, status: str = None, includePassengers: bool = False, includeCars: bool = False) -> List[Row]:
+        queryString = "SELECT t.[Id], t.[Destination], t.[Origin], t.[Capacity], t.[DepartTime], t.[ReturnTime], t.[Status] "
+        if includePassengers:
+            queryString += ', group_concat(p.[PassengerId], "-") AS Passengers '
+        if includeCars:
+            queryString += ', group_concat(c.[CarId], "-") AS Cars '
+
+        queryString += "FROM [TourTBL] AS t "
         conditions = list()
         params = list()
+        if includePassengers:
+            queryString += "INNER JOIN [TourPassengersTBL] AS p ON t.Id = p.TourId "
+        if includeCars:
+            queryString += "INNER JOIN [TourCarsTBL] AS c ON t.Id = c.TourId "
         if destination is not None:
-            conditions.append(f"[Destination] LIKE N'%?%'")
-            params.append(destination)
+            conditions.append(f'[Destination] LIKE ?')
+            params.append(f'%{destination}%')
         if origin is not None:
-            conditions.append(f"[Origin] LIKE N'%?%'")
-            params.append(origin)
+            conditions.append(f'[Origin] LIKE ?')
+            params.append(f'%{origin}%')
         if capacity is not None:
             conditions.append(f"[Capacity] = ?")
             params.append(capacity)
@@ -143,5 +152,12 @@ class Tour:
             params.append(status)
         if len(conditions) > 0:
             queryString += "WHERE " + ' AND '.join(conditions)
+        if includePassengers or includeCars:
+            queryString += " GROUP BY t.[Id]"
         cursor = DatabaseManager.execute(queryString, *params)
         return cursor.fetchall()
+
+    @classmethod
+    def GetPassengers(cls, Id: int):
+        cursor = DatabaseManager.execute("""SELECT * FROM """)
+        pass
