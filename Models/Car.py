@@ -41,7 +41,7 @@ class Car:
 
     @classmethod
     def CheckTagExists(cls, tag: str) -> bool:
-        cursor = DatabaseManager.execute("""SELECT COUNT(*) FROM [CarTBL] WHERE [CarTag] = ?""", tag)
+        cursor = DatabaseManager.query("""SELECT COUNT(*) FROM [CarTBL] WHERE [CarTag] = ?""", tag)
         count = cursor.fetchone()["COUNT"]
         return count != 0
 

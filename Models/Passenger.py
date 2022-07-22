@@ -14,7 +14,7 @@ class Passenger:
     @classmethod
     def CheckExists(cls, Id: str) -> bool:
         try:
-            cursor = DatabaseManager.execute("""SELECT [Id] FROM [PassengerTBL] WHERE [Id] = ?""", Id)
+            cursor = DatabaseManager.query("""SELECT [Id] FROM [PassengerTBL] WHERE [Id] = ?""", Id)
             return len(cursor.fetchall()) == 1
         except:
             return False
@@ -60,7 +60,7 @@ class Passenger:
 
     @classmethod
     def GetPassengerById(cls, Id: str) -> Optional['Passenger']:
-        cursor = DatabaseManager.execute(
+        cursor = DatabaseManager.query(
             """SELECT [Id], [Name], [Family], [FatherName], [Phone] FROM [PassengerTBL]
             WHERE [Id] = ?""", Id)
         p = cursor.fetchall()

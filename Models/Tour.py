@@ -1,5 +1,6 @@
 from typing import List, Tuple
 
+import jdatetime
 from pyodbc import Row
 
 from Models.DatabaseManager import DatabaseManager
@@ -15,13 +16,13 @@ class TourStatus:
 
 
 class Tour:
-    def __init__(self, Id: int, destination: str, origin: str, capacity: int, departTime: str, returnTime: str, status: str, passengers: list = None, cars: list = None):
+    def __init__(self, Id: int, destination: str, origin: str, capacity: int, departTime: jdatetime.datetime, returnTime: jdatetime.datetime, status: str, passengers: list = None, cars: list = None):
         self.id = Id
         self.destination = destination
         self.origin = origin
         self.capacity = capacity if capacity > 0 else 0
-        self.departTime = datetime.fromisoformat(departTime)
-        self.returnTime = datetime.fromisoformat(returnTime)
+        self.departTime = departTime
+        self.returnTime = returnTime
         self.status = status
         self.passengers = list()
         if passengers is not None:
@@ -51,17 +52,18 @@ class Tour:
     def DeleteTours(cls, Id: List[int]) -> bool:
         try:
             cursor = DatabaseManager.execute(
-                """UPDATE [TourTBL] SET [Status] = ? WHERE [Id] IN ?""",
-                TourStatus.Canceled, Id
+                f"UPDATE [TourTBL] SET [Status] = ? WHERE [Id] IN ({','.join('?' for _ in range(len(Id)))})",
+                TourStatus.Canceled, *Id
             )
             return cursor.rowcount == len(Id)
-        except:
+        except Exception as e:
+            print(e)
             return False
 
     @classmethod
     def hasTourInterference(cls, destination: str, origin: str, departTime: datetime, returnTime: datetime) -> bool:
         try:
-            cursor = DatabaseManager.execute(
+            cursor = DatabaseManager.query(
                 """SELECT COUNT(*) FROM [TourTBL] 
                 WHERE [Destination] = ? AND [Origin] = ? AND (([DepartTime] <= ? AND [ReturnTime] >= ?) OR ([DepartTime] <= ? AND [ReturnTime] >= ?))""",
                 destination, origin, departTime, departTime, returnTime, returnTime
@@ -73,7 +75,7 @@ class Tour:
     @classmethod
     def hasPassengerInterference(cls, passenger_id: str, departTime: datetime, returnTime: datetime) -> bool:
         try:
-            cursor = DatabaseManager.execute(
+            cursor = DatabaseManager.query(
                 """SELECT p.[PassengerId]
                 FROM [TourPassengersTBL] AS p
                 INNER JOIN [TourTBL] AS t
@@ -88,7 +90,7 @@ class Tour:
     @classmethod
     def hasCarInterference(cls, car_id: int, departTime: datetime, returnTime: datetime) -> bool:
         try:
-            cursor = DatabaseManager.execute(
+            cursor = DatabaseManager.query(
                 """SELECT c.[CarId]
                 FROM [TourCarsTBL] AS c
                 INNER JOIN [TourTBL] AS t on t.Id = c.TourId
@@ -101,7 +103,7 @@ class Tour:
 
     @classmethod
     def GetOrigins(cls) -> List[str]:
-        cursor = DatabaseManager.execute(
+        cursor = DatabaseManager.query(
             """SELECT [Origin] FROM [TourTBL] GROUP BY [Origin] ORDER BY COUNT([Origin]) DESC"""
         )
         origins = list(map(lambda row: row[0], cursor.fetchall()))
@@ -109,7 +111,7 @@ class Tour:
 
     @classmethod
     def GetDestinations(cls) -> List[str]:
-        cursor = DatabaseManager.execute(
+        cursor = DatabaseManager.query(
             """SELECT [Destination] FROM [TourTBL] GROUP BY [Destination] ORDER BY COUNT([Destination]) DESC"""
         )
         destinations = list(map(lambda row: row[0], cursor.fetchall()))
@@ -127,9 +129,9 @@ class Tour:
         conditions = list()
         params = list()
         if includePassengers:
-            queryString += "INNER JOIN [TourPassengersTBL] AS p ON t.Id = p.TourId "
+            queryString += "LEFT JOIN [TourPassengersTBL] AS p ON t.Id = p.TourId "
         if includeCars:
-            queryString += "INNER JOIN [TourCarsTBL] AS c ON t.Id = c.TourId "
+            queryString += "LEFT JOIN [TourCarsTBL] AS c ON t.Id = c.TourId "
         if destination is not None:
             conditions.append(f'[Destination] LIKE ?')
             params.append(f'%{destination}%')
@@ -140,11 +142,11 @@ class Tour:
             conditions.append(f"[Capacity] = ?")
             params.append(capacity)
         if fromTime is not None:
-            conditions.append(f"([DepartTime] >= ? OR [ReturnTime) >= ?")
+            conditions.append(f"([DepartTime] >= ? OR [ReturnTime] >= ?)")
             params.append(fromTime)
             params.append(fromTime)
         if toTime is not None:
-            conditions.append(f"([DepartTime] <= ? OR [ReturnTime) <= ?")
+            conditions.append(f"([DepartTime] <= ? OR [ReturnTime] <= ?)")
             params.append(toTime)
             params.append(toTime)
         if status is not None:
@@ -154,10 +156,17 @@ class Tour:
             queryString += "WHERE " + ' AND '.join(conditions)
         if includePassengers or includeCars:
             queryString += " GROUP BY t.[Id]"
-        cursor = DatabaseManager.execute(queryString, *params)
+        cursor = DatabaseManager.query(queryString, *params)
         return cursor.fetchall()
 
     @classmethod
-    def GetPassengers(cls, Id: int):
-        cursor = DatabaseManager.execute("""SELECT * FROM """)
-        pass
+    def ConfirmTour(cls, Id: int) -> bool:
+        try:
+            cursor = DatabaseManager.execute(
+                f"UPDATE [TourTBL] SET [Status] = ? WHERE [Id] = ?",
+                TourStatus.Registering, Id
+            )
+            return cursor.rowcount == 1
+        except Exception as e:
+            print(e)
+            return False

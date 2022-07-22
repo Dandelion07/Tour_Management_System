@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="SQLite - tourDB.db" uuid="b34b7a59-a2a8-479b-9ed7-5d8f0fe53ca5">
+    <data-source source="LOCAL" name="SQLite - tourDB.db" uuid="62a2e3e9-d135-4f24-b563-5e5cded3a2bf">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Models/tourDB.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

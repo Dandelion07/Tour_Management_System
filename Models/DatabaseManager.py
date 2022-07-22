@@ -13,7 +13,14 @@ class DatabaseManager:
         return cls.connection
 
     @classmethod
+    def query(cls, query_string: str, *params: object) -> sqlite3.Cursor:
+        cursor = cls.get_connection().cursor()
+        cursor.execute(query_string, list(params))
+        return cursor
+
+    @classmethod
     def execute(cls, query_string: str, *params: object) -> sqlite3.Cursor:
         cursor = cls.get_connection().cursor()
         cursor.execute(query_string, list(params))
+        cls.get_connection().commit()
         return cursor

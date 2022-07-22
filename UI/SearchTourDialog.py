@@ -1,26 +1,29 @@
 import datetime
 import re
+from typing import List, Optional, Union
 import jdatetime
-from PyQt5.QtWidgets import QDialog, QMainWindow, QTableWidgetItem
-from Models.Tour import TourStatus, Tour
 from UI.DatePicker import DatePicker
-from UI.Ui_DeleteTourDialog import Ui_DeleteTourDialog
-from UI.YesNoDialog import YesNoDialog
+from UI.Ui_SearchTourDialog import Ui_SearchTourDialog
+from PyQt5.QtWidgets import QDialog, QTableWidgetItem, QAbstractItemView
+from Models.Tour import TourStatus, Tour
 
 
-class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
-    def __init__(self, parent: QMainWindow = None):
-        super(DeleteTourDialog, self).__init__(parent)
+class SearchTourDialog(Ui_SearchTourDialog, QDialog):
+    def __init__(self, parent = None, status: List[str] = None, multiSelection: bool = True, justForReport: bool = False) -> None:
+        super(SearchTourDialog, self).__init__(parent)
         self.setupUi(self)
+        self.statusList = status or [TourStatus.NotConfirmed, TourStatus.Registering, TourStatus.FullCapacity, TourStatus.Ended, TourStatus.Canceled]
         self.lblError.setVisible(False)
-
-        self.cmbStatus.addItems([TourStatus.NotConfirmed, TourStatus.Registering, TourStatus.FullCapacity])
+        self.cmbStatus.addItems(self.statusList)
 
         self.cmbOrigin.addItems(Tour.GetOrigins())
         self.cmbDestination.addItems(Tour.GetDestinations())
 
+        self.btnSelect.setVisible(not justForReport)
+        self.tblTours.setSelectionMode(QAbstractItemView.MultiSelection if multiSelection else QAbstractItemView.SingleSelection)
+
         self.btnReturn.clicked.connect(lambda: self.reject())
-        self.btnDelete.clicked.connect(self.OnDeleteClicked)
+        self.btnSelect.clicked.connect(self.OnSelectClicked)
         self.btnSearch.clicked.connect(self.OnSearchClicked)
         self.btnFromDatePicker.clicked.connect(self.OnFromDatePickerClicked)
         self.btnToDatePicker.clicked.connect(self.OnToDatePickerClicked)
@@ -30,6 +33,8 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
         self.status: str = None
         self.fromDate: jdatetime.datetime = None
         self.toDate: jdatetime.datetime = None
+
+        self.tours = list()
 
     def ValidateInputs(self) -> bool:
         self.origin = self.cmbOrigin.currentText().strip() or None
@@ -71,41 +76,47 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
         return True
 
     def OnSearchClicked(self) -> None:
+        self.tours = list()
         self.tblTours.setRowCount(0)
         self.lblError.setVisible(False)
         if not self.ValidateInputs():
             return
-        tours = Tour.SearchTours(self.destination, self.origin, None, self.fromDate.togregorian() if self.fromDate else None, self.toDate.togregorian() if self.toDate else None, self.status, True, False)
+        tours = Tour.SearchTours(self.destination, self.origin, None, self.fromDate.togregorian() if self.fromDate else None, self.toDate.togregorian() if self.toDate else None, self.status, True, True)
         if len(tours) == 0:
             self.lblError.setVisible(True)
             self.lblError.setText('اردویی با این مشخصات یافت نشد.')
             return
 
         for row in tours:
+            tour = Tour(
+                row["Id"],
+                row["Destination"],
+                row["Origin"],
+                row["Capacity"],
+                jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["DepartTime"])),
+                jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["ReturnTime"])),
+                row["Status"],
+                row["Passengers"].split("-") if row["Passengers"] is not None else list(),
+                row["Cars"].split("-") if row["Cars"] is not None else list()
+            )
+            self.tours.append(tour)
             rowCount = self.tblTours.rowCount()
             self.tblTours.setRowCount(rowCount + 1)
-            self.tblTours.setItem(rowCount, 0, QTableWidgetItem(str(row["Id"])))
-            self.tblTours.setItem(rowCount, 1, QTableWidgetItem(row["Origin"]))
-            self.tblTours.setItem(rowCount, 2, QTableWidgetItem(row["Destination"]))
-            self.tblTours.setItem(rowCount, 3, QTableWidgetItem(str(row["Capacity"])))
-            self.tblTours.setItem(rowCount, 4, QTableWidgetItem(jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["DepartTime"])).isoformat(' ', 'minutes')))
-            self.tblTours.setItem(rowCount, 5, QTableWidgetItem(jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["ReturnTime"])).isoformat(' ', 'minutes')))
-            self.tblTours.setItem(rowCount, 6, QTableWidgetItem(row["Status"]))
-            self.tblTours.setItem(rowCount, 7, QTableWidgetItem(str(len(row["Passengers"].split('-')))))
+            self.tblTours.setItem(rowCount, 0, QTableWidgetItem(str(tour.id)))
+            self.tblTours.setItem(rowCount, 1, QTableWidgetItem(tour.origin))
+            self.tblTours.setItem(rowCount, 2, QTableWidgetItem(tour.destination))
+            self.tblTours.setItem(rowCount, 3, QTableWidgetItem(str(tour.capacity)))
+            self.tblTours.setItem(rowCount, 4, QTableWidgetItem(tour.departTime.isoformat(' ', 'minutes')))
+            self.tblTours.setItem(rowCount, 5, QTableWidgetItem(tour.returnTime.isoformat(' ', 'minutes')))
+            self.tblTours.setItem(rowCount, 6, QTableWidgetItem(tour.status))
+            self.tblTours.setItem(rowCount, 7, QTableWidgetItem(str(len(tour.passengers))))
 
-    def OnDeleteClicked(self) -> None:
+    def OnSelectClicked(self):
         self.lblError.setVisible(False)
         rows = self.tblTours.selectionModel().selectedRows()
         if len(rows) == 0:
             self.lblError.setVisible(True)
             self.lblError.setText('هیچ اردویی انتخاب نشده است.')
-            return
-        if YesNoDialog('آیا از حذف اردوهای انتخاب‌شده مطمئن هستید؟', 'حذف اردو', self).exec() == QDialog.Rejected:
-            return
-        res = Tour.DeleteTours([int(self.tblTours.item(row.row(), 0).text()) for row in rows])
-        if not res:
-            self.lblError.setVisible(True)
-            self.lblError.setText('مشکلی در حذف اردوها به وجود آمده است.')
             return
         self.accept()
 
@@ -118,3 +129,9 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
         res, date = DatePicker(self).exec()
         if res == QDialog.Accepted:
             self.txtToDate.setText(str(date))
+
+    def exec(self) -> List[Union[int, Optional[List[Tour]]]]:
+        res = super(SearchTourDialog, self).exec()
+        if res == QDialog.Accepted:
+            return [res, self.tours]
+        return [res, None]

@@ -23,7 +23,7 @@ class Account:
     @classmethod
     def SignIn(cls, username: str, password: str, role: int) -> List[Union[Optional[str], Optional[AccessLevel]]]:
         pass_hash = sha256(password.encode()).hexdigest()
-        cursor = DatabaseManager.execute(
+        cursor = DatabaseManager.query(
             """SELECT u.[Username], u.[Password], a.[CreateTour], a.[DeleteTour], a.[ConfirmTour], a.[RegisterPassenger], a.[ModifyPassenger], a.[CancelRegistration], a.[ReserveCars], a.[AddUser], a.[DeleteUser]
             FROM [UserTBL] AS u
             INNER JOIN [AccessTBL] AS a
@@ -40,7 +40,7 @@ class Account:
     @classmethod
     def SignUp(cls, username: str, password: str, access_level: int = AccessLevel.USER) -> bool:
         # Check if username exists
-        cursor = DatabaseManager.execute("""SELECT [Username] FROM UserTBL WHERE [Username] = ?""", username)
+        cursor = DatabaseManager.query("""SELECT [Username] FROM UserTBL WHERE [Username] = ?""", username)
         if len(cursor.fetchall()) > 0:
             return False
 

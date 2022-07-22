@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DeleteTourDialog</class>
- <widget class="QDialog" name="DeleteTourDialog">
+ <class>ConfirmTourDialog</class>
+ <widget class="QDialog" name="ConfirmTourDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>870</width>
-    <height>644</height>
+    <width>744</width>
+    <height>703</height>
    </rect>
   </property>
   <property name="font">
@@ -17,11 +17,11 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>حذف اردو</string>
+   <string>تایید اردو</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resource.qrc">
-    <normaloff>:/icons/resources/icons/deleteTour.png</normaloff>:/icons/resources/icons/deleteTour.png</iconset>
+    <normaloff>:/icons/resources/icons/confirmTour.png</normaloff>:/icons/resources/icons/confirmTour.png</iconset>
   </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
@@ -34,7 +34,7 @@
     <number>10</number>
    </property>
    <property name="sizeConstraint">
-    <enum>QLayout::SetDefaultConstraint</enum>
+    <enum>QLayout::SetMinimumSize</enum>
    </property>
    <property name="leftMargin">
     <number>10</number>
@@ -54,51 +54,41 @@
       <enum>QLayout::SetFixedSize</enum>
      </property>
      <item row="0" column="0">
-      <widget class="QLabel" name="lblStatus">
-       <property name="text">
-        <string>وضعیت اردو</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="cmbStatus"/>
-     </item>
-     <item row="1" column="0">
       <widget class="QLabel" name="lblOrigin">
        <property name="text">
         <string>مبدا</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="0" column="1">
       <widget class="QComboBox" name="cmbOrigin">
        <property name="editable">
         <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="lblDestination">
        <property name="text">
         <string>مقصد</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="1" column="1">
       <widget class="QComboBox" name="cmbDestination">
        <property name="editable">
         <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="lblFromDate">
        <property name="text">
         <string>از تاریخ</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="2" column="1">
       <layout class="QHBoxLayout" name="HLayoutFromDate">
        <item>
         <widget class="QPushButton" name="btnFromDatePicker">
@@ -128,14 +118,14 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="lblToDate">
        <property name="text">
         <string>تا تاریخ</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
+     <item row="3" column="1">
       <layout class="QHBoxLayout" name="HLayoutToDate">
        <item>
         <widget class="QPushButton" name="btnToDatePicker">
@@ -208,7 +198,7 @@
       <bool>true</bool>
      </property>
      <property name="selectionMode">
-      <enum>QAbstractItemView::MultiSelection</enum>
+      <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectRows</enum>
@@ -266,15 +256,67 @@
        <string>وضعیت اردو</string>
       </property>
      </column>
-     <column>
-      <property name="text">
-       <string>ثبت نام شده</string>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpConfirm">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>چک لیست موارد بررسی برای تایید اردو</string>
+     </property>
+     <layout class="QVBoxLayout" name="VLayoutGropbox">
+      <property name="spacing">
+       <number>10</number>
       </property>
-     </column>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item>
+       <widget class="QCheckBox" name="chbDestination">
+        <property name="text">
+         <string>هماهنگی با مقصد اردو انجام شده است</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chbInsurance">
+        <property name="text">
+         <string>مسافران بیمه شده‌اند</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chbConfirm">
+        <property name="text">
+         <string>تاییدیه اردو از سازمان‌های نظارتی دربافت شده است</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="lblError">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="palette">
       <palette>
        <active>
@@ -319,14 +361,17 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="HLayoutButtons">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
      <item>
-      <widget class="QPushButton" name="btnDelete">
+      <widget class="QPushButton" name="btnConfirm">
        <property name="text">
-        <string>حذف اردوها</string>
+        <string>تایید اردو</string>
        </property>
        <property name="icon">
         <iconset resource="resource.qrc">
-         <normaloff>:/icons/resources/icons/deleteTour.png</normaloff>:/icons/resources/icons/deleteTour.png</iconset>
+         <normaloff>:/icons/resources/icons/confirmTour.png</normaloff>:/icons/resources/icons/confirmTour.png</iconset>
        </property>
        <property name="iconSize">
         <size>

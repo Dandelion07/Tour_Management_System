@@ -2,7 +2,9 @@ from PyQt5.QtCore import QLocale, Qt, QTimer
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QMainWindow, QLabel, QDialog
 from Models.Account import AccessLevel
+from UI.ConfirmTourDialog import ConfirmTourDialog
 from UI.DeleteTourDialog import DeleteTourDialog
+from UI.RegisterPassengerDialog import RegisterPassengerDialog
 from UI.Ui_MainWindow import Ui_MainWindow
 from UI.MessageDialog import MessageDialog, MessageDialogType
 from UI.CreateTourDialog import CreateTourDialog
@@ -50,6 +52,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.btnNewTour.clicked.connect(self.OnCreateNewTourClicked)
         self.btnDeleteTour.clicked.connect(self.OnDeleteTourClicked)
+        self.btnConfirmTour.clicked.connect(self.OnConfirmTourClicked)
+        self.btnRegisterPassenger.clicked.connect(self.OnRegisterPassengerClicked)
 
     def CheckRole(self) -> None:
         self.AddUserAction.setEnabled(self.accessLevel.addUser)
@@ -102,3 +106,15 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         if res == QDialog.Accepted:
             self.ShowStatusBarMessage('اردو با موفقیت حذف شد.', 3000)
             MessageDialog('اردو با موفقیت حذف شد.', 'پیام', MessageDialogType.INFO, self).exec()
+
+    def OnConfirmTourClicked(self):
+        res = ConfirmTourDialog(self).exec()
+        if res == QDialog.Accepted:
+            self.ShowStatusBarMessage('اردو با موفقیت تایید شد', 3000)
+            MessageDialog('اردو با موفقیت تایید شد', 'پیام', MessageDialogType.INFO).exec()
+
+    def OnRegisterPassengerClicked(self):
+        res = RegisterPassengerDialog(self).exec()
+        if res == QDialog.Accepted:
+            self.ShowStatusBarMessage('مسافر با موفقیت ثبت‌نام شد', 3000)
+            MessageDialog('مسافر با موفقیت ثبت‌نام شد.', 'پیام', MessageDialogType.INFO).exec()

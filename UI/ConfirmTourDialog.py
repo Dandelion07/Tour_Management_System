@@ -1,40 +1,43 @@
 import datetime
 import re
 import jdatetime
-from PyQt5.QtWidgets import QDialog, QMainWindow, QTableWidgetItem
-from Models.Tour import TourStatus, Tour
+from Models.Tour import Tour, TourStatus
 from UI.DatePicker import DatePicker
-from UI.Ui_DeleteTourDialog import Ui_DeleteTourDialog
+from UI.Ui_ConfirmTourDialog import Ui_ConfirmTourDialog
+from PyQt5.QtWidgets import QDialog, QMainWindow, QTableWidgetItem
+
 from UI.YesNoDialog import YesNoDialog
 
 
-class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
+class ConfirmTourDialog(Ui_ConfirmTourDialog, QDialog):
     def __init__(self, parent: QMainWindow = None):
-        super(DeleteTourDialog, self).__init__(parent)
+        super(ConfirmTourDialog, self).__init__(parent)
         self.setupUi(self)
+        self.grpConfirm.setEnabled(False)
+        self.checkboxes = [self.chbDestination, self.chbInsurance, self.chbConfirm]
         self.lblError.setVisible(False)
-
-        self.cmbStatus.addItems([TourStatus.NotConfirmed, TourStatus.Registering, TourStatus.FullCapacity])
 
         self.cmbOrigin.addItems(Tour.GetOrigins())
         self.cmbDestination.addItems(Tour.GetDestinations())
 
         self.btnReturn.clicked.connect(lambda: self.reject())
-        self.btnDelete.clicked.connect(self.OnDeleteClicked)
+        self.btnConfirm.clicked.connect(self.OnConfirmClicked)
         self.btnSearch.clicked.connect(self.OnSearchClicked)
         self.btnFromDatePicker.clicked.connect(self.OnFromDatePickerClicked)
         self.btnToDatePicker.clicked.connect(self.OnToDatePickerClicked)
+        self.tblTours.itemSelectionChanged.connect(self.OnSelectionChanged)
 
         self.origin: str = None
         self.destination: str = None
-        self.status: str = None
         self.fromDate: jdatetime.datetime = None
         self.toDate: jdatetime.datetime = None
+
+    def OnSelectionChanged(self):
+        self.grpConfirm.setEnabled(len(self.tblTours.selectionModel().selectedRows()) > 0)
 
     def ValidateInputs(self) -> bool:
         self.origin = self.cmbOrigin.currentText().strip() or None
         self.destination = self.cmbDestination.currentText().strip() or None
-        self.status = self.cmbStatus.currentText()
         self.fromDate = None
         self.toDate = None
 
@@ -70,12 +73,22 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
             return False
         return True
 
+    def OnFromDatePickerClicked(self):
+        res, date = DatePicker(self).exec()
+        if res == QDialog.Accepted:
+            self.txtFromDate.setText(str(date))
+
+    def OnToDatePickerClicked(self):
+        res, date = DatePicker(self).exec()
+        if res == QDialog.Accepted:
+            self.txtToDate.setText(str(date))
+
     def OnSearchClicked(self) -> None:
         self.tblTours.setRowCount(0)
         self.lblError.setVisible(False)
         if not self.ValidateInputs():
             return
-        tours = Tour.SearchTours(self.destination, self.origin, None, self.fromDate.togregorian() if self.fromDate else None, self.toDate.togregorian() if self.toDate else None, self.status, True, False)
+        tours = Tour.SearchTours(self.destination, self.origin, None, self.fromDate.togregorian() if self.fromDate else None, self.toDate.togregorian() if self.toDate else None, TourStatus.NotConfirmed, False, False)
         if len(tours) == 0:
             self.lblError.setVisible(True)
             self.lblError.setText('اردویی با این مشخصات یافت نشد.')
@@ -91,30 +104,24 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
             self.tblTours.setItem(rowCount, 4, QTableWidgetItem(jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["DepartTime"])).isoformat(' ', 'minutes')))
             self.tblTours.setItem(rowCount, 5, QTableWidgetItem(jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["ReturnTime"])).isoformat(' ', 'minutes')))
             self.tblTours.setItem(rowCount, 6, QTableWidgetItem(row["Status"]))
-            self.tblTours.setItem(rowCount, 7, QTableWidgetItem(str(len(row["Passengers"].split('-')))))
 
-    def OnDeleteClicked(self) -> None:
+    def OnConfirmClicked(self) -> None:
         self.lblError.setVisible(False)
         rows = self.tblTours.selectionModel().selectedRows()
         if len(rows) == 0:
             self.lblError.setVisible(True)
             self.lblError.setText('هیچ اردویی انتخاب نشده است.')
             return
-        if YesNoDialog('آیا از حذف اردوهای انتخاب‌شده مطمئن هستید؟', 'حذف اردو', self).exec() == QDialog.Rejected:
+        if any(not chb.isChecked() for chb in self.checkboxes):
+            self.lblError.setVisible(True)
+            self.lblError.setText('تمام موارد چک لیست را تایید کنید')
             return
-        res = Tour.DeleteTours([int(self.tblTours.item(row.row(), 0).text()) for row in rows])
+        if YesNoDialog('آیا از تایید اردوهای انتخاب‌شده مطمئن هستید؟', 'حذف اردو', self).exec() == QDialog.Rejected:
+            return
+        row = rows[0]
+        res = Tour.ConfirmTour(int(self.tblTours.item(row.row(), 0).text()))
         if not res:
             self.lblError.setVisible(True)
-            self.lblError.setText('مشکلی در حذف اردوها به وجود آمده است.')
+            self.lblError.setText('مشکلی در حذف تایید اردو به وجود آمده است.')
             return
         self.accept()
-
-    def OnFromDatePickerClicked(self):
-        res, date = DatePicker(self).exec()
-        if res == QDialog.Accepted:
-            self.txtFromDate.setText(str(date))
-
-    def OnToDatePickerClicked(self):
-        res, date = DatePicker(self).exec()
-        if res == QDialog.Accepted:
-            self.txtToDate.setText(str(date))
