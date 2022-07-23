@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>238</width>
-    <height>192</height>
+    <width>267</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="font">
@@ -144,7 +144,7 @@
    <item>
     <layout class="QHBoxLayout" name="HLayoutButtons">
      <item>
-      <widget class="QPushButton" name="btnDelete">
+      <widget class="QPushButton" name="btnCancelRegistration">
        <property name="text">
         <string>انصراف از اردو</string>
        </property>

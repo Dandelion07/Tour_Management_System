@@ -2,6 +2,7 @@ from typing import List, Optional
 import jdatetime
 from Models.DatabaseManager import DatabaseManager
 from datetime import datetime
+from Models.Passenger import Passenger
 
 
 class TourStatus:
@@ -241,3 +242,66 @@ class Tour:
             )
             return cursor.rowcount == 1
         return True
+
+    @classmethod
+    def SearchTourPassengers(cls, tourId: int, passengerId: str = None, name: str = None, family: str = None, father: str = None, phone: str = None) -> List[Passenger]:
+        query_string = """
+                        SELECT t.TourId, p.Id, p.Name, p.Family, p.FatherName, p.Phone FROM [TourPassengersTBL] AS t
+                        INNER JOIN [PassengerTBL] AS p on t.[PassengerId] = p.[Id]
+                        """
+        conditions = list()
+        params = list()
+
+        conditions.append('t.TourId = ?')
+        params.append(tourId)
+
+        if passengerId is not None:
+            conditions.append('p.Id = ?')
+            params.append(passengerId)
+
+        if name is not None:
+            conditions.append('p.Name LIKE ?')
+            params.append(f'%{name}%')
+
+        if family is not None:
+            conditions.append('p.Family LIKE ?')
+            params.append(f'%{family}%')
+
+        if father is not None:
+            conditions.append('p.FatherName LIKE ?')
+            params.append(f'%{father}%')
+
+        if phone is not None:
+            conditions.append('p.Phone LIKE ?')
+            params.append(f'%{phone}%')
+
+        query_string += ' WHERE ' + ' AND '.join(conditions)
+        cursor = DatabaseManager.query(query_string, *params)
+        rows = cursor.fetchall()
+        passengers = list()
+        for row in rows:
+            passengers.append(Passenger(
+                row["Id"],
+                row["Name"],
+                row["Family"],
+                row["FatherName"],
+                row["Phone"]
+            ))
+        return passengers
+
+    @classmethod
+    def CancelRegistration(cls, tourId: int, passengerId: List[str]) -> bool:
+        cursor = DatabaseManager.execute(
+            f"DELETE FROM TourPassengersTBL WHERE TourId = ? AND PassengerId IN ({','.join('?' for _ in range(len(passengerId)))})",
+            tourId, *passengerId
+        )
+        if cursor.rowcount != len(passengerId):
+            return False
+
+        cursor = DatabaseManager.execute(
+            """
+            UPDATE [TourTBL] SET [Status] = ? WHERE [Id] = ?
+            """,
+            TourStatus.Registering, tourId
+        )
+        return cursor.rowcount == 1
