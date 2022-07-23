@@ -1,8 +1,5 @@
-from typing import List, Tuple
-
+from typing import List, Optional
 import jdatetime
-from pyodbc import Row
-
 from Models.DatabaseManager import DatabaseManager
 from datetime import datetime
 
@@ -118,7 +115,7 @@ class Tour:
         return destinations
 
     @classmethod
-    def SearchTours(cls, destination: str = None, origin: str = None, capacity: int = None, fromTime: datetime = None, toTime: datetime = None, status: str = None, includePassengers: bool = False, includeCars: bool = False) -> List[Row]:
+    def SearchTours(cls, destination: str = None, origin: str = None, capacity: int = None, fromTime: datetime = None, toTime: datetime = None, status: str = None, includePassengers: bool = False, includeCars: bool = False) -> List['Tour']:
         queryString = "SELECT t.[Id], t.[Destination], t.[Origin], t.[Capacity], t.[DepartTime], t.[ReturnTime], t.[Status] "
         if includePassengers:
             queryString += ', group_concat(p.[PassengerId], "-") AS Passengers '
@@ -157,7 +154,21 @@ class Tour:
         if includePassengers or includeCars:
             queryString += " GROUP BY t.[Id]"
         cursor = DatabaseManager.query(queryString, *params)
-        return cursor.fetchall()
+        rows = cursor.fetchall()
+        tours = list()
+        for row in rows:
+            tours.append(Tour(
+                row["Id"],
+                row["Destination"],
+                row["Origin"],
+                row["Capacity"],
+                jdatetime.datetime.fromgregorian(datetime=datetime.fromisoformat(row["DepartTime"])),
+                jdatetime.datetime.fromgregorian(datetime=datetime.fromisoformat(row["ReturnTime"])),
+                row["Status"],
+                row["Passengers"].split("-") if row["Passengers"] is not None else list(),
+                row["Cars"].split("-") if row["Cars"] is not None else list()
+            ))
+        return tours
 
     @classmethod
     def ConfirmTour(cls, Id: int) -> bool:
@@ -170,3 +181,63 @@ class Tour:
         except Exception as e:
             print(e)
             return False
+
+    @classmethod
+    def SearchTourById(cls, Id: int) -> Optional['Tour']:
+        cursor = DatabaseManager.query(
+            """
+            SELECT t.[Id], t.[Destination], t.[Origin], t.[Capacity], t.[DepartTime], t.[ReturnTime], t.[Status]
+            , group_concat(p.[PassengerId], '-') AS Passengers 
+            , group_concat(c.[CarId], '-') AS Cars 
+            FROM [TourTBL] AS t 
+            LEFT JOIN [TourPassengersTBL] AS p ON t.Id = p.TourId 
+            LEFT JOIN [TourCarsTBL] AS c ON t.Id = c.TourId 
+            WHERE t.[Id] = ?
+            GROUP BY t.[Id]
+            """, Id
+        )
+        row = cursor.fetchone()
+        if not row:
+            return None
+        return Tour(
+            row["Id"],
+            row["Destination"],
+            row["Origin"],
+            row["Capacity"],
+            jdatetime.datetime.fromgregorian(datetime=datetime.fromisoformat(row["DepartTime"])),
+            jdatetime.datetime.fromgregorian(datetime=datetime.fromisoformat(row["ReturnTime"])),
+            row["Status"],
+            row["Passengers"].split("-") if row["Passengers"] is not None else list(),
+            row["Cars"].split("-") if row["Cars"] is not None else list()
+        )
+
+    @classmethod
+    def RegisterPassenger(cls, tour: 'Tour', passengerId: str) -> bool:
+        if len(tour.passengers) >= tour.capacity:
+            return False
+        if passengerId in tour.passengers:
+            return False
+        tour.passengers.append(passengerId)
+
+        cursor = DatabaseManager.execute(
+            """
+            INSERT INTO [TourPassengersTBL] (TourId, PassengerId) 
+            VALUES (?, ?)
+            """,
+            tour.id, passengerId
+        )
+        if cursor.rowcount != 1:
+            return False
+
+        if len(tour.passengers) == tour.capacity:
+            tour.status = TourStatus.FullCapacity
+            cursor = DatabaseManager.execute(
+                """
+                UPDATE [TourTBL] SET
+                [Status] = ?
+                WHERE [Id] = ?
+                """,
+                tour.status, tour.id
+            )
+            return cursor.rowcount == 1
+        return True

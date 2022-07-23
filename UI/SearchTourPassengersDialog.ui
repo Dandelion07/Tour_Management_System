@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SearchTourDialog</class>
- <widget class="QDialog" name="SearchTourDialog">
+ <class>SearchTourPassengersDialog</class>
+ <widget class="QDialog" name="SearchTourPassengersDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>870</width>
-    <height>584</height>
+    <width>532</width>
+    <height>547</height>
    </rect>
   </property>
   <property name="font">
@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>جست‌وجوی اردو</string>
+   <string>لیست مسافران یک اردو</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resource.qrc">
@@ -54,91 +54,44 @@
       <enum>QLayout::SetFixedSize</enum>
      </property>
      <item row="0" column="0">
-      <widget class="QLabel" name="lblStatus">
+      <widget class="QLabel" name="lblTourID">
        <property name="text">
-        <string>وضعیت اردو</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="cmbStatus"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="lblOrigin">
-       <property name="text">
-        <string>مبدا</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="cmbOrigin">
-       <property name="editable">
-        <bool>true</bool>
+        <string>کد اردو</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="lblDestination">
+      <widget class="QLabel" name="lblName">
        <property name="text">
-        <string>مقصد</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QComboBox" name="cmbDestination">
-       <property name="editable">
-        <bool>true</bool>
+        <string>نام</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="lblFromDate">
+      <widget class="QLabel" name="lblFamily">
        <property name="text">
-        <string>از تاریخ</string>
+        <string>نام خانوادگی</string>
        </property>
       </widget>
-     </item>
-     <item row="3" column="1">
-      <layout class="QHBoxLayout" name="HLayoutFromDate">
-       <item>
-        <widget class="QPushButton" name="btnFromDatePicker">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="resource.qrc">
-           <normaloff>:/icons/resources/icons/calendar.png</normaloff>:/icons/resources/icons/calendar.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtFromDate"/>
-       </item>
-      </layout>
      </item>
      <item row="4" column="0">
-      <widget class="QLabel" name="lblToDate">
+      <widget class="QLabel" name="lblFather">
        <property name="text">
-        <string>تا تاریخ</string>
+        <string>نام پدر</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <layout class="QHBoxLayout" name="HLayoutToDate">
+     <item row="5" column="0">
+      <widget class="QLabel" name="lblPhone">
+       <property name="text">
+        <string>موبایل</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <layout class="QHBoxLayout" name="HLayoutFromDate_3">
        <item>
-        <widget class="QPushButton" name="btnToDatePicker">
+        <widget class="QPushButton" name="btnSearchTourId">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -161,20 +114,42 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="txtToDate"/>
+        <widget class="QLineEdit" name="txtTourId"/>
        </item>
       </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblPassengerId">
+       <property name="text">
+        <string>کد ملی</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="txtPassengerId"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="txtName"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="txtFamily"/>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="txtFather"/>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="txtPhone"/>
      </item>
     </layout>
    </item>
    <item>
     <widget class="QPushButton" name="btnSearch">
      <property name="text">
-      <string>جست‌وجوی اردوها</string>
+      <string> نمایش لیست مسافران</string>
      </property>
      <property name="icon">
       <iconset resource="resource.qrc">
-       <normaloff>:/icons/resources/icons/searchTour.png</normaloff>:/icons/resources/icons/searchTour.png</iconset>
+       <normaloff>:/icons/resources/icons/searchPassenger.png</normaloff>:/icons/resources/icons/searchPassenger.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -185,7 +160,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTableWidget" name="tblTours">
+    <widget class="QTableWidget" name="tblPassengers">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -233,42 +208,27 @@
      </attribute>
      <column>
       <property name="text">
-       <string>کد اردو</string>
+       <string>کد ملی</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>مبدا</string>
+       <string>نام</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>مقصد</string>
+       <string>نام خانوادگی</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>ظرفیت</string>
+       <string>نام پدر</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>تاریخ رفت</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>تاریخ برگشت</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>وضعیت اردو</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>ثبت نام شده</string>
+       <string>موبایل</string>
       </property>
      </column>
     </widget>
@@ -322,11 +282,11 @@
      <item>
       <widget class="QPushButton" name="btnSelect">
        <property name="text">
-        <string>انتخاب اردوها</string>
+        <string>انتخاب مسافر</string>
        </property>
        <property name="icon">
         <iconset resource="resource.qrc">
-         <normaloff>:/icons/resources/icons/Tour.png</normaloff>:/icons/resources/icons/Tour.png</iconset>
+         <normaloff>:/icons/resources/icons/Passenger.png</normaloff>:/icons/resources/icons/Passenger.png</iconset>
        </property>
        <property name="iconSize">
         <size>

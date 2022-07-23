@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DeleteTourDialog</class>
- <widget class="QDialog" name="DeleteTourDialog">
+ <class>EditRegistrationDialog</class>
+ <widget class="QDialog" name="EditRegistrationDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>289</width>
-    <height>151</height>
+    <width>255</width>
+    <height>311</height>
    </rect>
   </property>
   <property name="font">
@@ -17,11 +17,11 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>حذف اردو</string>
+   <string>ویرایش اطلاعات مسافر</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resource.qrc">
-    <normaloff>:/icons/resources/icons/deleteTour.png</normaloff>:/icons/resources/icons/deleteTour.png</iconset>
+    <normaloff>:/icons/resources/icons/editRegistration.png</normaloff>:/icons/resources/icons/editRegistration.png</iconset>
   </property>
   <property name="layoutDirection">
    <enum>Qt::RightToLeft</enum>
@@ -49,16 +49,28 @@
     <number>10</number>
    </property>
    <item>
-    <layout class="QFormLayout" name="FLayoutFields">
+    <layout class="QFormLayout" name="FLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
+     <property name="horizontalSpacing">
+      <number>10</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>10</number>
+     </property>
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="lblId">
        <property name="text">
-        <string>کد اردو</string>
+        <string>کد ملی</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <layout class="QHBoxLayout" name="HLayoutTourId">
+      <layout class="QHBoxLayout" name="HLayoutId">
+       <item>
+        <widget class="QLineEdit" name="txtId"/>
+       </item>
        <item>
         <widget class="QPushButton" name="btnSearchId">
          <property name="text">
@@ -66,7 +78,7 @@
          </property>
          <property name="icon">
           <iconset resource="resource.qrc">
-           <normaloff>:/icons/resources/icons/searchTour.png</normaloff>:/icons/resources/icons/searchTour.png</iconset>
+           <normaloff>:/icons/resources/icons/searchPassenger.png</normaloff>:/icons/resources/icons/searchPassenger.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -76,14 +88,47 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLineEdit" name="txtTourId">
-         <property name="placeholderText">
-          <string>کد اردوها را با - از هم جدا کنید</string>
-         </property>
-        </widget>
-       </item>
       </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblName">
+       <property name="text">
+        <string>نام</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="txtName"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblFamily">
+       <property name="text">
+        <string>نام خانوادگی</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="txtFamily"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblFather">
+       <property name="text">
+        <string>نام پدر</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="txtFather"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lblPhone">
+       <property name="text">
+        <string>شماره موبایل</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="txtPhone"/>
      </item>
     </layout>
    </item>
@@ -133,14 +178,17 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="HLayoutButtons">
+     <property name="spacing">
+      <number>10</number>
+     </property>
      <item>
-      <widget class="QPushButton" name="btnDelete">
+      <widget class="QPushButton" name="btnEdit">
        <property name="text">
-        <string>حذف اردوها</string>
+        <string>ویرایش اطلاعات</string>
        </property>
        <property name="icon">
         <iconset resource="resource.qrc">
-         <normaloff>:/icons/resources/icons/deleteTour.png</normaloff>:/icons/resources/icons/deleteTour.png</iconset>
+         <normaloff>:/icons/resources/icons/editRegistration.png</normaloff>:/icons/resources/icons/editRegistration.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -174,6 +222,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>txtId</tabstop>
+  <tabstop>btnSearchId</tabstop>
+  <tabstop>txtName</tabstop>
+  <tabstop>txtFamily</tabstop>
+  <tabstop>txtFather</tabstop>
+  <tabstop>txtPhone</tabstop>
+  <tabstop>btnEdit</tabstop>
+  <tabstop>btnReturn</tabstop>
+ </tabstops>
  <resources>
   <include location="resource.qrc"/>
  </resources>

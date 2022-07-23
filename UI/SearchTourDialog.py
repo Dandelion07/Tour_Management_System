@@ -1,4 +1,3 @@
-import datetime
 import re
 from typing import List, Optional, Union
 import jdatetime
@@ -27,6 +26,7 @@ class SearchTourDialog(Ui_SearchTourDialog, QDialog):
         self.btnSearch.clicked.connect(self.OnSearchClicked)
         self.btnFromDatePicker.clicked.connect(self.OnFromDatePickerClicked)
         self.btnToDatePicker.clicked.connect(self.OnToDatePickerClicked)
+        self.tblTours.itemSelectionChanged.connect(self.OnSelectionChanged)
 
         self.origin: str = None
         self.destination: str = None
@@ -34,7 +34,8 @@ class SearchTourDialog(Ui_SearchTourDialog, QDialog):
         self.fromDate: jdatetime.datetime = None
         self.toDate: jdatetime.datetime = None
 
-        self.tours = list()
+        self.tours = dict()
+        self.selectedTours = list()
 
     def ValidateInputs(self) -> bool:
         self.origin = self.cmbOrigin.currentText().strip() or None
@@ -76,7 +77,7 @@ class SearchTourDialog(Ui_SearchTourDialog, QDialog):
         return True
 
     def OnSearchClicked(self) -> None:
-        self.tours = list()
+        self.tours = dict()
         self.tblTours.setRowCount(0)
         self.lblError.setVisible(False)
         if not self.ValidateInputs():
@@ -87,19 +88,7 @@ class SearchTourDialog(Ui_SearchTourDialog, QDialog):
             self.lblError.setText('اردویی با این مشخصات یافت نشد.')
             return
 
-        for row in tours:
-            tour = Tour(
-                row["Id"],
-                row["Destination"],
-                row["Origin"],
-                row["Capacity"],
-                jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["DepartTime"])),
-                jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["ReturnTime"])),
-                row["Status"],
-                row["Passengers"].split("-") if row["Passengers"] is not None else list(),
-                row["Cars"].split("-") if row["Cars"] is not None else list()
-            )
-            self.tours.append(tour)
+        for tour in tours:
             rowCount = self.tblTours.rowCount()
             self.tblTours.setRowCount(rowCount + 1)
             self.tblTours.setItem(rowCount, 0, QTableWidgetItem(str(tour.id)))
@@ -110,6 +99,7 @@ class SearchTourDialog(Ui_SearchTourDialog, QDialog):
             self.tblTours.setItem(rowCount, 5, QTableWidgetItem(tour.returnTime.isoformat(' ', 'minutes')))
             self.tblTours.setItem(rowCount, 6, QTableWidgetItem(tour.status))
             self.tblTours.setItem(rowCount, 7, QTableWidgetItem(str(len(tour.passengers))))
+            self.tours[rowCount] = tour
 
     def OnSelectClicked(self):
         self.lblError.setVisible(False)
@@ -130,8 +120,14 @@ class SearchTourDialog(Ui_SearchTourDialog, QDialog):
         if res == QDialog.Accepted:
             self.txtToDate.setText(str(date))
 
+    def OnSelectionChanged(self):
+        rows = self.tblTours.selectionModel().selectedRows()
+        self.selectedTours = list()
+        for row in rows:
+            self.selectedTours.append(self.tours[row.row()])
+
     def exec(self) -> List[Union[int, Optional[List[Tour]]]]:
         res = super(SearchTourDialog, self).exec()
         if res == QDialog.Accepted:
-            return [res, self.tours]
+            return [res, self.selectedTours]
         return [res, None]

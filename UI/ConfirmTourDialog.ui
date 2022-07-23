@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>744</width>
-    <height>703</height>
+    <width>318</width>
+    <height>311</height>
    </rect>
   </property>
   <property name="font">
@@ -34,7 +34,7 @@
     <number>10</number>
    </property>
    <property name="sizeConstraint">
-    <enum>QLayout::SetMinimumSize</enum>
+    <enum>QLayout::SetFixedSize</enum>
    </property>
    <property name="leftMargin">
     <number>10</number>
@@ -49,61 +49,24 @@
     <number>10</number>
    </property>
    <item>
-    <layout class="QFormLayout" name="FLayoutSearchFields">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
-     </property>
+    <layout class="QFormLayout" name="FLayoutFields">
      <item row="0" column="0">
-      <widget class="QLabel" name="lblOrigin">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>مبدا</string>
+        <string>کد اردو</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="cmbOrigin">
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="lblDestination">
-       <property name="text">
-        <string>مقصد</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="cmbDestination">
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="lblFromDate">
-       <property name="text">
-        <string>از تاریخ</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <layout class="QHBoxLayout" name="HLayoutFromDate">
+      <layout class="QHBoxLayout" name="HLayoutTourId">
        <item>
-        <widget class="QPushButton" name="btnFromDatePicker">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+        <widget class="QPushButton" name="btnSearchId">
          <property name="text">
           <string/>
          </property>
          <property name="icon">
           <iconset resource="resource.qrc">
-           <normaloff>:/icons/resources/icons/calendar.png</normaloff>:/icons/resources/icons/calendar.png</iconset>
+           <normaloff>:/icons/resources/icons/searchTour.png</normaloff>:/icons/resources/icons/searchTour.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -114,149 +77,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="txtFromDate"/>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="lblToDate">
-       <property name="text">
-        <string>تا تاریخ</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <layout class="QHBoxLayout" name="HLayoutToDate">
-       <item>
-        <widget class="QPushButton" name="btnToDatePicker">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="resource.qrc">
-           <normaloff>:/icons/resources/icons/calendar.png</normaloff>:/icons/resources/icons/calendar.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtToDate"/>
+        <widget class="QLineEdit" name="txtTourId"/>
        </item>
       </layout>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QPushButton" name="btnSearch">
-     <property name="text">
-      <string>جست‌وجوی اردوها</string>
-     </property>
-     <property name="icon">
-      <iconset resource="resource.qrc">
-       <normaloff>:/icons/resources/icons/searchTour.png</normaloff>:/icons/resources/icons/searchTour.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QTableWidget" name="tblTours">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <family>B Nazanin</family>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAsNeeded</enum>
-     </property>
-     <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustIgnored</enum>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <attribute name="horizontalHeaderVisible">
-      <bool>true</bool>
-     </attribute>
-     <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>true</bool>
-     </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>50</number>
-     </attribute>
-     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderStretchLastSection">
-      <bool>true</bool>
-     </attribute>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>کد اردو</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>مبدا</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>مقصد</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>ظرفیت</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>تاریخ رفت</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>تاریخ برگشت</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>وضعیت اردو</string>
-      </property>
-     </column>
-    </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="grpConfirm">

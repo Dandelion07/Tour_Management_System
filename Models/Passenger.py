@@ -21,6 +21,8 @@ class Passenger:
 
     @classmethod
     def CreatePassenger(cls, Id: str, name: str, family: str, father: str = None, phone: str = None) -> bool:
+        if cls.CheckExists(Id):
+            return False
         try:
             cursor = DatabaseManager.execute(
                 """INSERT INTO [PassengerTBL]

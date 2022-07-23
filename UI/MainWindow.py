@@ -2,9 +2,12 @@ from PyQt5.QtCore import QLocale, Qt, QTimer
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QMainWindow, QLabel, QDialog
 from Models.Account import AccessLevel
+from UI.CancelRegistrationDialog import CancelRegistrationDialog
 from UI.ConfirmTourDialog import ConfirmTourDialog
 from UI.DeleteTourDialog import DeleteTourDialog
+from UI.EditRegistrationDialog import EditRegistrationDialog
 from UI.RegisterPassengerDialog import RegisterPassengerDialog
+from UI.SearchTourDialog import SearchTourDialog
 from UI.Ui_MainWindow import Ui_MainWindow
 from UI.MessageDialog import MessageDialog, MessageDialogType
 from UI.CreateTourDialog import CreateTourDialog
@@ -54,6 +57,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.btnDeleteTour.clicked.connect(self.OnDeleteTourClicked)
         self.btnConfirmTour.clicked.connect(self.OnConfirmTourClicked)
         self.btnRegisterPassenger.clicked.connect(self.OnRegisterPassengerClicked)
+        self.btnEditRegistration.clicked.connect(self.OnEditRegistrationClicked)
+        self.btnSearchTours.clicked.connect(self.OnSearchToursClicked)
+        self.btnCancelRegistration.clicked.connect(self.OnCancelRegistrationClicked)
 
     def CheckRole(self) -> None:
         self.AddUserAction.setEnabled(self.accessLevel.addUser)
@@ -72,14 +78,14 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         if self.status == Status.SIGNED_IN:
             self.status = Status.CLOSED
 
-    def OnCloseClicked(self):
+    def OnCloseClicked(self) -> None:
         self.close()
 
-    def OnSignOutClicked(self):
+    def OnSignOutClicked(self) -> None:
         self.status = Status.SIGNED_OUT
         self.close()
 
-    def OnAboutClicked(self):
+    def OnAboutClicked(self) -> None:
         message = 'سیستم مدیریت اردوهای مرکز فرهنگی' + '\n' + 'تهیه کننده: پریسا سادات عمادی' + '\n' + 'سال 1401'
         MessageDialog(message, 'درباره برنامه', MessageDialogType.INFO).exec()
 
@@ -89,14 +95,14 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.ShowStatusBarMessage('اردوی جدید ایجاد شد', 3000)
             MessageDialog('اردوی جدید با موفقیت ایجاد شد.', 'پیام', MessageDialogType.INFO, self).exec()
 
-    def OnTimerTicked(self):
+    def OnTimerTicked(self) -> None:
         try:
             self.statusBar.messageChanged.disconnect()
         except:
             pass
         self.statusBar.showMessage(jdatetime.datetime.now().isoformat(' ', 'seconds'))
 
-    def ShowStatusBarMessage(self, message: str, msecs: int = 0):
+    def ShowStatusBarMessage(self, message: str, msecs: int = 0) -> None:
         self.timer.stop()
         self.statusBar.showMessage(message, msecs)
         self.statusBar.messageChanged.connect(self.timer.start)
@@ -107,14 +113,29 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.ShowStatusBarMessage('اردو با موفقیت حذف شد.', 3000)
             MessageDialog('اردو با موفقیت حذف شد.', 'پیام', MessageDialogType.INFO, self).exec()
 
-    def OnConfirmTourClicked(self):
+    def OnConfirmTourClicked(self) -> None:
         res = ConfirmTourDialog(self).exec()
         if res == QDialog.Accepted:
             self.ShowStatusBarMessage('اردو با موفقیت تایید شد', 3000)
             MessageDialog('اردو با موفقیت تایید شد', 'پیام', MessageDialogType.INFO).exec()
 
-    def OnRegisterPassengerClicked(self):
+    def OnRegisterPassengerClicked(self) -> None:
         res = RegisterPassengerDialog(self).exec()
         if res == QDialog.Accepted:
-            self.ShowStatusBarMessage('مسافر با موفقیت ثبت‌نام شد', 3000)
-            MessageDialog('مسافر با موفقیت ثبت‌نام شد.', 'پیام', MessageDialogType.INFO).exec()
+            self.ShowStatusBarMessage('مسافر با موفقیت ثبت‌ نام شد', 3000)
+            MessageDialog('مسافر با موفقیت ثبت نام شد.', 'پیام', MessageDialogType.INFO).exec()
+
+    def OnEditRegistrationClicked(self) -> None:
+        res = EditRegistrationDialog(self).exec()
+        if res == QDialog.Accepted:
+            self.ShowStatusBarMessage('اطلاعات مسافر با موفقیت ویرایش شد', 3000)
+            MessageDialog('اطلاعات مسافر با موفقیت ویرایش شد', 'پیام', MessageDialogType.INFO).exec()
+
+    def OnSearchToursClicked(self) -> None:
+        SearchTourDialog(self, None, True, True).exec()
+
+    def OnCancelRegistrationClicked(self) -> None:
+        res = CancelRegistrationDialog(self).exec()
+        if res == QDialog.Accepted:
+            self.ShowStatusBarMessage('انصراف مسافران با موفقیت انجام شد', 3000)
+            MessageDialog('انصراف مسافران با موفقیت انجام شد', 'پیام', MessageDialogType.INFO).exec()

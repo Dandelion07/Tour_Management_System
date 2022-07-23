@@ -1,9 +1,6 @@
-import datetime
-import re
-import jdatetime
-from PyQt5.QtWidgets import QDialog, QMainWindow, QTableWidgetItem
+from PyQt5.QtWidgets import QDialog, QMainWindow
 from Models.Tour import TourStatus, Tour
-from UI.DatePicker import DatePicker
+from UI.SearchTourDialog import SearchTourDialog
 from UI.Ui_DeleteTourDialog import Ui_DeleteTourDialog
 from UI.YesNoDialog import YesNoDialog
 
@@ -14,107 +11,33 @@ class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):
         self.setupUi(self)
         self.lblError.setVisible(False)
 
-        self.cmbStatus.addItems([TourStatus.NotConfirmed, TourStatus.Registering, TourStatus.FullCapacity])
-
-        self.cmbOrigin.addItems(Tour.GetOrigins())
-        self.cmbDestination.addItems(Tour.GetDestinations())
-
         self.btnReturn.clicked.connect(lambda: self.reject())
         self.btnDelete.clicked.connect(self.OnDeleteClicked)
-        self.btnSearch.clicked.connect(self.OnSearchClicked)
-        self.btnFromDatePicker.clicked.connect(self.OnFromDatePickerClicked)
-        self.btnToDatePicker.clicked.connect(self.OnToDatePickerClicked)
-
-        self.origin: str = None
-        self.destination: str = None
-        self.status: str = None
-        self.fromDate: jdatetime.datetime = None
-        self.toDate: jdatetime.datetime = None
-
-    def ValidateInputs(self) -> bool:
-        self.origin = self.cmbOrigin.currentText().strip() or None
-        self.destination = self.cmbDestination.currentText().strip() or None
-        self.status = self.cmbStatus.currentText()
-        self.fromDate = None
-        self.toDate = None
-
-        datePattern = r'^([1-9]\d{3})-(\d{1,2})-(\d{1,2})$'
-        match = re.match(datePattern, self.txtFromDate.text())
-        if self.txtFromDate.text().strip() != '':
-            if not match:
-                self.lblError.setVisible(True)
-                self.lblError.setText('فرمت تاریخ صحیح نیست')
-                return False
-            try:
-                self.fromDate = jdatetime.datetime(int(match.group(1)), int(match.group(2)), int(match.group(3)))
-            except ValueError:
-                self.lblError.setVisible(True)
-                self.lblError.setText('تاریخ صحیح نیست')
-                return False
-
-        if self.txtToDate.text().strip() != '':
-            match = re.match(datePattern, self.txtToDate.text())
-            if not match:
-                self.lblError.setVisible(True)
-                self.lblError.setText('فرمت تاریخ صحیح نیست')
-                return False
-            try:
-                self.toDate = jdatetime.datetime(int(match.group(1)), int(match.group(2)), int(match.group(3)))
-            except ValueError:
-                self.lblError.setVisible(True)
-                self.lblError.setText('تاریخ صحیح نیست')
-                return False
-        if self.fromDate and self.toDate and self.toDate < self.fromDate:
-            self.lblError.setVisible(True)
-            self.lblError.setText('تاریخ دوم نباید زودتر از تاریخ اول باشد.')
-            return False
-        return True
-
-    def OnSearchClicked(self) -> None:
-        self.tblTours.setRowCount(0)
-        self.lblError.setVisible(False)
-        if not self.ValidateInputs():
-            return
-        tours = Tour.SearchTours(self.destination, self.origin, None, self.fromDate.togregorian() if self.fromDate else None, self.toDate.togregorian() if self.toDate else None, self.status, True, False)
-        if len(tours) == 0:
-            self.lblError.setVisible(True)
-            self.lblError.setText('اردویی با این مشخصات یافت نشد.')
-            return
-
-        for row in tours:
-            rowCount = self.tblTours.rowCount()
-            self.tblTours.setRowCount(rowCount + 1)
-            self.tblTours.setItem(rowCount, 0, QTableWidgetItem(str(row["Id"])))
-            self.tblTours.setItem(rowCount, 1, QTableWidgetItem(row["Origin"]))
-            self.tblTours.setItem(rowCount, 2, QTableWidgetItem(row["Destination"]))
-            self.tblTours.setItem(rowCount, 3, QTableWidgetItem(str(row["Capacity"])))
-            self.tblTours.setItem(rowCount, 4, QTableWidgetItem(jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["DepartTime"])).isoformat(' ', 'minutes')))
-            self.tblTours.setItem(rowCount, 5, QTableWidgetItem(jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["ReturnTime"])).isoformat(' ', 'minutes')))
-            self.tblTours.setItem(rowCount, 6, QTableWidgetItem(row["Status"]))
-            self.tblTours.setItem(rowCount, 7, QTableWidgetItem(str(len(row["Passengers"].split('-')))))
+        self.btnSearchId.clicked.connect(self.OnSearchIdClicked)
+        self.tours = list()
 
     def OnDeleteClicked(self) -> None:
         self.lblError.setVisible(False)
-        rows = self.tblTours.selectionModel().selectedRows()
-        if len(rows) == 0:
+        try:
+            IDs = list(map(int, self.txtTourId.text().replace(' ', '').split('-')))
+        except:
+            self.lblError.setVisible(True)
+            self.lblError.setText('فرمت کد اردوها نادرست است')
+            return
+        if len(IDs) == 0:
             self.lblError.setVisible(True)
             self.lblError.setText('هیچ اردویی انتخاب نشده است.')
             return
         if YesNoDialog('آیا از حذف اردوهای انتخاب‌شده مطمئن هستید؟', 'حذف اردو', self).exec() == QDialog.Rejected:
             return
-        res = Tour.DeleteTours([int(self.tblTours.item(row.row(), 0).text()) for row in rows])
+        res = Tour.DeleteTours(IDs)
         if not res:
             self.lblError.setVisible(True)
             self.lblError.setText('مشکلی در حذف اردوها به وجود آمده است.')
             return
         self.accept()
 
-    def OnFromDatePickerClicked(self):
-        res, date = DatePicker(self).exec()
+    def OnSearchIdClicked(self):
+        res, self.tours = SearchTourDialog(self, [TourStatus.NotConfirmed, TourStatus.Registering, TourStatus.FullCapacity], True, False).exec()
         if res == QDialog.Accepted:
-            self.txtFromDate.setText(str(date))
-
-    def OnToDatePickerClicked(self):
-        res, date = DatePicker(self).exec()
-        if res == QDialog.Accepted:
-            self.txtToDate.setText(str(date))
+            self.txtTourId.setText('-'.join(str(t.id) for t in self.tours))
