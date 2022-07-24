@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file>resources/icons/addService.png</file>
+    <file>resources/icons/searchService.png</file>
     <file>resources/icons/Passenger.png</file>
     <file>resources/icons/reset.png</file>
     <file>resources/icons/Tour.png</file>

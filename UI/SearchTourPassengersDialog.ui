@@ -103,7 +103,7 @@
          </property>
          <property name="icon">
           <iconset resource="resource.qrc">
-           <normaloff>:/icons/resources/icons/calendar.png</normaloff>:/icons/resources/icons/calendar.png</iconset>
+           <normaloff>:/icons/resources/icons/searchTour.png</normaloff>:/icons/resources/icons/searchTour.png</iconset>
          </property>
          <property name="iconSize">
           <size>

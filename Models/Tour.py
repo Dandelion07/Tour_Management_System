@@ -1,5 +1,7 @@
 from typing import List, Optional
 import jdatetime
+
+from Models.Car import Car
 from Models.DatabaseManager import DatabaseManager
 from datetime import datetime
 from Models.Passenger import Passenger
@@ -305,3 +307,59 @@ class Tour:
             TourStatus.Registering, tourId
         )
         return cursor.rowcount == 1
+
+    @classmethod
+    def ShowAccessibleCarsForTour(cls, tour: 'Tour') -> List[Car]:
+        cursor = DatabaseManager.query("""SELECT Id, Type, Capacity, CarTag, DriverName, DriverID, DriverPhone FROM CarTBL""")
+        rows = cursor.fetchall()
+        availableCars = list()
+        for row in rows:
+            if not cls.hasCarInterference(int(row["Id"]), tour.departTime, tour.returnTime):
+                availableCars.append(Car(
+                    int(row["Id"]),
+                    row["Type"],
+                    int(row["Capacity"]),
+                    row["CarTag"],
+                    row["DriverName"],
+                    row["DriverID"],
+                    row["DriverPhone"]
+                ))
+        return availableCars
+
+    @classmethod
+    def AssignCarsToTour(cls, tour: 'Tour', cars: List[Car]) -> bool:
+        for car in cars:
+            cursor = DatabaseManager.execute(
+                """
+                INSERT INTO TourCarsTBL (TourId, CarId)
+                VALUES (?, ?)
+                """,
+                tour.id, car.id
+            )
+            if cursor.rowcount != 1:
+                return False
+        return True
+
+    @classmethod
+    def GetTourCars(cls, tour: 'Tour') -> List[Car]:
+        cursor = DatabaseManager.query(
+            """
+            SELECT t.TourId, c.Id, c.Type, c.Capacity, c.CarTag, c.DriverName, c.DriverID, c.DriverPhone FROM [TourCarsTBL] AS t
+            INNER JOIN [CarTBL] AS c on t.[CarId] = c.[Id]
+            WHERE t.TourId = ?
+            """,
+            tour.id
+        )
+        rows = cursor.fetchall()
+        cars = list()
+        for row in rows:
+            cars.append(Car(
+                int(row["Id"]),
+                row["Type"],
+                int(row["Capacity"]),
+                row["CarTag"],
+                row["DriverName"],
+                row["DriverID"],
+                row["DriverPhone"]
+            ))
+        return cars

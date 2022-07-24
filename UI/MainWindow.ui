@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>542</width>
-    <height>406</height>
+    <width>710</width>
+    <height>397</height>
    </rect>
   </property>
   <property name="font">
@@ -289,6 +289,46 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="btnSearchTourPassengers">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>لیست مسافران هر اردو</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/searchPassenger.png</normaloff>:/icons/resources/icons/searchPassenger.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSearchTourCars">
+         <property name="locale">
+          <locale language="Persian" country="Iran"/>
+         </property>
+         <property name="text">
+          <string>لیست سرویس‌های هر اردو</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resource.qrc">
+           <normaloff>:/icons/resources/icons/searchService.png</normaloff>:/icons/resources/icons/searchService.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="btnSearchPassengers">
          <property name="locale">
           <locale language="Persian" country="Iran"/>
@@ -318,7 +358,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>542</width>
+     <width>710</width>
      <height>21</height>
     </rect>
    </property>

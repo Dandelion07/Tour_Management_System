@@ -54,11 +54,25 @@ class Account:
         return True
 
     @classmethod
-    def DeleteUser(cls, username: str) -> bool:
-        cursor = DatabaseManager.execute("""DELETE FROM [UserTBL] WHERE [Username] = ?""", username)
-        if cursor.rowcount == 0:
-            return False
-        return True
+    def DeleteUser(cls, username: str, adminUsername: str) -> bool:
+        cursor = DatabaseManager.execute("""DELETE FROM [UserTBL] WHERE [Username] = ? AND [Username] != ?""", username, adminUsername)
+        return cursor.rowcount != 0
+
+    @classmethod
+    def EditUser(cls, username: str, password: str, new_username: str = None, new_password: str = None) -> bool:
+        if not new_username:
+            new_username = username
+        if not new_password:
+            new_password = password
+
+        pass_hash = sha256(password.encode()).hexdigest()
+        new_pass_hash = sha256(new_password.encode()).hexdigest()
+
+        cursor = DatabaseManager.execute(
+            """UPDATE [UserTBL] SET Username = ?, Password = ? WHERE Username = ? AND Password = ?""",
+            new_username, new_pass_hash, username, pass_hash
+        )
+        return cursor.rowcount != 0
 
     @classmethod
     def TestSignIn(cls, username: str, password: str, role: int) -> List[Union[Optional[str], Optional[AccessLevel]]]:

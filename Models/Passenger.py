@@ -1,6 +1,8 @@
-from typing import Optional
-
+import datetime
+from typing import Optional, List
+import jdatetime
 from Models.DatabaseManager import DatabaseManager
+from Models import Tour
 
 
 class Passenger:
@@ -70,3 +72,29 @@ class Passenger:
             return None
         p = p[0]
         return Passenger(p["Id"], p["Name"], p["Family"], p["FatherName"], p["Phone"])
+
+    @classmethod
+    def SearchPassengerHistory(cls, Id: str) -> Optional[List['Tour']]:
+        cursor = DatabaseManager.query(
+            """
+            SELECT t.Id, t.Origin, t.Destination, t.Capacity, t.DepartTime, t.ReturnTime, t.Status FROM [TourPassengersTBL] AS tp
+            INNER JOIN TourTBL AS t ON tp.TourId = t.Id
+            WHERE tp.PassengerId = ?
+            """,
+            Id
+        )
+        rows = cursor.fetchall()
+        tours = list()
+        for row in rows:
+            tour = Tour.Tour(
+                int(row["Id"]),
+                row["Destination"],
+                row["Origin"],
+                int(row["Capacity"]),
+                jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["DepartTime"])),
+                jdatetime.datetime.fromgregorian(datetime=datetime.datetime.fromisoformat(row["ReturnTime"])),
+                row["Status"]
+            )
+            tour.passengers = Tour.Tour.SearchTourPassengers(tour.id)
+            tours.append(tour)
+        return tours
