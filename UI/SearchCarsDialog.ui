@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SearchCarsDialog</class>
+ <widget class="QDialog" name="SearchCarsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>723</width>
+    <height>547</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>B Nazanin</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>جست‌وجوی سرویس‌ها</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/icons/resources/icons/searchService.png</normaloff>:/icons/resources/icons/searchService.png</iconset>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::RightToLeft</enum>
+  </property>
+  <property name="locale">
+   <locale language="Persian" country="Iran"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
+   <property name="leftMargin">
+    <number>10</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+   <item>
+    <layout class="QFormLayout" name="FLayoutSearchFields">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblType">
+       <property name="text">
+        <string>نوع ماشین</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblTag">
+       <property name="text">
+        <string>پلاک</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblDriverName">
+       <property name="text">
+        <string>نام راننده</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lblDriverId">
+       <property name="text">
+        <string>کد ملی راننده</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="lblDriverPhone">
+       <property name="text">
+        <string>موبایل راننده</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblCapacity_2">
+       <property name="text">
+        <string>ظرفیت</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="txtDriverName">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="txtDriverId">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="txtDriverPhone">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="txtType">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="spnCapacity">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="HLayoutTag">
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <item>
+        <widget class="QSpinBox" name="spnTagCity">
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="minimum">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblIran">
+         <property name="text">
+          <string>ایران</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spnTagNum2">
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="minimum">
+          <number>100</number>
+         </property>
+         <property name="maximum">
+          <number>999</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="cmbTagLetter">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <item>
+          <property name="text">
+           <string>ب</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ج</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>چ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>د</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ذ</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ر</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ز</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>س</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ش</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ص</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ط</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ع</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ف</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ق</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ک</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ل</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>م</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ن</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>و</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ه</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ی</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spnTagNum1">
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="minimum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSearch">
+     <property name="text">
+      <string>جست‌وجوی سرویس‌ها</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resource.qrc">
+       <normaloff>:/icons/resources/icons/searchService.png</normaloff>:/icons/resources/icons/searchService.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tblCars">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>B Nazanin</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>50</number>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>کد سرویس</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>نوع ماشین</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ظرفیت</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>پلاک</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>نام راننده</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>کد ملی راننده</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>موبایل راننده</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblError">
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>120</red>
+           <green>120</green>
+           <blue>120</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="text">
+      <string>خطا</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="HLayoutButtons">
+     <item>
+      <widget class="QPushButton" name="btnSelect">
+       <property name="text">
+        <string>انتخاب سرویس‌ها</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/icons/resources/icons/addService.png</normaloff>:/icons/resources/icons/addService.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnReturn">
+       <property name="text">
+        <string>بازگشت</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/icons/resources/icons/return.png</normaloff>:/icons/resources/icons/return.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+S</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

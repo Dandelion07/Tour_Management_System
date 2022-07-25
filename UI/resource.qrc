@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="icons">
+    <file>resources/icons/activateService.png</file>
+    <file>resources/icons/deactivateService.png</file>
+    <file>resources/icons/EditService.png</file>
     <file>resources/icons/addService.png</file>
     <file>resources/icons/searchService.png</file>
     <file>resources/icons/Passenger.png</file>
