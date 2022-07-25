@@ -1,9 +1,8 @@
 from PyQt5.QtWidgets import QDialog
-
 from Models.Tour import Tour, TourStatus
-from UI.SearchTourPassengersDialog import SearchTourPassengersDialog
+from Forms.SearchTourPassengersDialog import SearchTourPassengersDialog
 from UI.Ui_CancelRegistrationDialog import Ui_CancelRegistrationDialog
-from UI.YesNoDialog import YesNoDialog
+from Forms.YesNoDialog import YesNoDialog
 
 
 class CancelRegistrationDialog(Ui_CancelRegistrationDialog, QDialog):

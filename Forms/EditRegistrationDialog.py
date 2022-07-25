@@ -3,7 +3,7 @@ from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QDialog
 from Models.Passenger import Passenger
 from UI.Ui_EditRegistrationDialog import Ui_EditRegistrationDialog
-from UI.YesNoDialog import YesNoDialog
+from Forms.YesNoDialog import YesNoDialog
 
 
 class EditRegistrationDialog(Ui_EditRegistrationDialog, QDialog):

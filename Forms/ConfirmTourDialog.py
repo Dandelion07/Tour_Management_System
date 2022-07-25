@@ -1,13 +1,9 @@
-from typing import Tuple
-
 from PyQt5.QtCore import QObject, QEvent
-from PyQt5.QtGui import QFocusEvent, QValidator
 from Models.Tour import Tour, TourStatus
-from UI.SearchTourDialog import SearchTourDialog
+from Forms.SearchTourDialog import SearchTourDialog
 from UI.Ui_ConfirmTourDialog import Ui_ConfirmTourDialog
-from PyQt5.QtWidgets import QDialog, QMainWindow, QLineEdit
-
-from UI.YesNoDialog import YesNoDialog
+from PyQt5.QtWidgets import QDialog, QMainWindow
+from Forms.YesNoDialog import YesNoDialog
 
 
 class ConfirmTourDialog(Ui_ConfirmTourDialog, QDialog):

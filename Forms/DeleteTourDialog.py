@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QDialog, QMainWindow
 from Models.Tour import TourStatus, Tour
-from UI.SearchTourDialog import SearchTourDialog
+from Forms.SearchTourDialog import SearchTourDialog
 from UI.Ui_DeleteTourDialog import Ui_DeleteTourDialog
-from UI.YesNoDialog import YesNoDialog
+from Forms.YesNoDialog import YesNoDialog
 
 
 class DeleteTourDialog(Ui_DeleteTourDialog, QDialog):

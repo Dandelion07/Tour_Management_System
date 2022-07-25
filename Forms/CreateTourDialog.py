@@ -1,7 +1,7 @@
 import jdatetime
 from UI.Ui_CreateTourDialog import Ui_CreateTourDialog
 from PyQt5.QtWidgets import QDialog, QMainWindow
-from UI.DatePicker import DatePicker
+from Forms.DatePicker import DatePicker
 from Models.Tour import Tour
 import re
 

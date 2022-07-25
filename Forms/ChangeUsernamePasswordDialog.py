@@ -1,10 +1,8 @@
 from typing import List, Union
-
 from PyQt5.QtWidgets import QDialog
-
 from Models.Account import Account
 from UI.Ui_ChangeUsernamePasswordDialog import Ui_ChangeUsernamePasswordDialog
-from UI.YesNoDialog import YesNoDialog
+from Forms.YesNoDialog import YesNoDialog
 
 
 class ChangeUsernamePasswordDialog(Ui_ChangeUsernamePasswordDialog, QDialog):

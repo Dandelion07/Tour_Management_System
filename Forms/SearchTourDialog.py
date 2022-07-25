@@ -1,7 +1,7 @@
 import re
 from typing import List, Optional, Union
 import jdatetime
-from UI.DatePicker import DatePicker
+from Forms.DatePicker import DatePicker
 from UI.Ui_SearchTourDialog import Ui_SearchTourDialog
 from PyQt5.QtWidgets import QDialog, QTableWidgetItem, QAbstractItemView
 from Models.Tour import TourStatus, Tour

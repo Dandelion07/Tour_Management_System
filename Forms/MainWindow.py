@@ -2,21 +2,21 @@ from PyQt5.QtCore import QLocale, Qt, QTimer
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QMainWindow, QLabel, QDialog
 from Models.Account import AccessLevel
-from UI.AddUserDialog import AddUserDialog
-from UI.CancelRegistrationDialog import CancelRegistrationDialog
-from UI.ChangeUsernamePasswordDialog import ChangeUsernamePasswordDialog
-from UI.ConfirmTourDialog import ConfirmTourDialog
-from UI.DeleteTourDialog import DeleteTourDialog
-from UI.DeleteUserDialog import DeleteUserDialog
-from UI.EditRegistrationDialog import EditRegistrationDialog
-from UI.RegisterPassengerDialog import RegisterPassengerDialog
-from UI.ReserveCarsDialog import ReserveCarsDialog
-from UI.SearchPassengersDialog import SearchPassengersDialog
-from UI.SearchTourDialog import SearchTourDialog
-from UI.SearchTourPassengersDialog import SearchTourPassengersDialog
+from Forms.AddUserDialog import AddUserDialog
+from Forms.CancelRegistrationDialog import CancelRegistrationDialog
+from Forms.ChangeUsernamePasswordDialog import ChangeUsernamePasswordDialog
+from Forms.ConfirmTourDialog import ConfirmTourDialog
+from Forms.DeleteTourDialog import DeleteTourDialog
+from Forms.DeleteUserDialog import DeleteUserDialog
+from Forms.EditRegistrationDialog import EditRegistrationDialog
+from Forms.RegisterPassengerDialog import RegisterPassengerDialog
+from Forms.ReserveCarsDialog import ReserveCarsDialog
+from Forms.SearchPassengersDialog import SearchPassengersDialog
+from Forms.SearchTourDialog import SearchTourDialog
+from Forms.SearchTourPassengersDialog import SearchTourPassengersDialog
 from UI.Ui_MainWindow import Ui_MainWindow
-from UI.MessageDialog import MessageDialog, MessageDialogType
-from UI.CreateTourDialog import CreateTourDialog
+from Forms.MessageDialog import MessageDialog, MessageDialogType
+from Forms.CreateTourDialog import CreateTourDialog
 import jdatetime
 
 

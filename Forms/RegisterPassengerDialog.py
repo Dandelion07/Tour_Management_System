@@ -1,11 +1,9 @@
 import re
-
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QDialog, QMainWindow
-
 from Models.Passenger import Passenger
 from Models.Tour import TourStatus, Tour
-from UI.SearchTourDialog import SearchTourDialog
+from Forms.SearchTourDialog import SearchTourDialog
 from UI.Ui_RegisterPassengerDialog import Ui_RegisterPassengerDialog
 
 

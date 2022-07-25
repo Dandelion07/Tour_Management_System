@@ -1,7 +1,5 @@
 from typing import List, Union
-
 from PyQt5.QtGui import QCloseEvent
-
 from UI.Ui_LoginDialog import Ui_LoginDialog
 from PyQt5.QtWidgets import QDialog
 from Models.Account import AccessLevel, Account

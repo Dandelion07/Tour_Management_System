@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QDialog
-
 from Models.Account import Account, AccessLevel
 from UI.Ui_AddUserDialog import Ui_AddUserDialog
 

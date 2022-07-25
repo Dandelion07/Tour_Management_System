@@ -1,6 +1,5 @@
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QDialog
-
 from UI.Ui_YesNoDialog import Ui_YesNoDialog
 
 

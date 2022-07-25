@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 from PyQt5.QtWidgets import QDialog, QAbstractItemView, QTableWidgetItem
 from Models.Tour import Tour, TourStatus
 from Models.Passenger import Passenger
-from UI.SearchTourDialog import SearchTourDialog
+from Forms.SearchTourDialog import SearchTourDialog
 from UI.Ui_SearchTourPassengersDialog import Ui_SearchTourPassengersDialog
 
 

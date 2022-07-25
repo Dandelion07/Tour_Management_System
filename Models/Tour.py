@@ -1,6 +1,5 @@
 from typing import List, Optional
 import jdatetime
-
 from Models.Car import Car
 from Models.DatabaseManager import DatabaseManager
 from datetime import datetime

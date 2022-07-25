@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import QDialog
-
 from Models.Account import Account
 from UI.Ui_DeleteUserDialog import Ui_DeleteUserDialog
-from UI.YesNoDialog import YesNoDialog
+from Forms.YesNoDialog import YesNoDialog
 
 
 class DeleteUserDialog(Ui_DeleteUserDialog, QDialog):

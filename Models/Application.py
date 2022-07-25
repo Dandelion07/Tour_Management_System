@@ -2,9 +2,9 @@ import sys
 from PyQt5.QtWidgets import QApplication, QDialog
 from typing import List, Optional
 from Models.Account import AccessLevel
-from UI.LoginDialog import LoginDialog
-from UI.SelectRoleDialog import SelectRoleDialog
-from UI.MainWindow import MainWindow, Status
+from Forms.LoginDialog import LoginDialog
+from Forms.SelectRoleDialog import SelectRoleDialog
+from Forms.MainWindow import MainWindow, Status
 
 
 class Application(QApplication):

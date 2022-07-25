@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QDialog, QTableWidgetItem
-from UI.SearchTourDialog import SearchTourDialog
+from Forms.SearchTourDialog import SearchTourDialog
 from UI.Ui_ReserveCarsDialog import Ui_ReserveCarsDialog
 from Models.Tour import Tour, TourStatus
-from UI.YesNoDialog import YesNoDialog
+from Forms.YesNoDialog import YesNoDialog
 
 
 class ReserveCarsDialog(Ui_ReserveCarsDialog, QDialog):
