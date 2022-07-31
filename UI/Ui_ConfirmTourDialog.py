@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ConfirmTourDialog(object):
     def setupUi(self, ConfirmTourDialog):
         ConfirmTourDialog.setObjectName("ConfirmTourDialog")
-        ConfirmTourDialog.resize(318, 311)
+        ConfirmTourDialog.resize(318, 349)
         font = QtGui.QFont()
         font.setFamily("B Nazanin")
         font.setPointSize(12)
@@ -57,6 +57,9 @@ class Ui_ConfirmTourDialog(object):
         self.VLayoutGropbox.setContentsMargins(10, 10, 10, 10)
         self.VLayoutGropbox.setSpacing(10)
         self.VLayoutGropbox.setObjectName("VLayoutGropbox")
+        self.chbSelectAll = QtWidgets.QCheckBox(self.grpConfirm)
+        self.chbSelectAll.setObjectName("chbSelectAll")
+        self.VLayoutGropbox.addWidget(self.chbSelectAll)
         self.chbDestination = QtWidgets.QCheckBox(self.grpConfirm)
         self.chbDestination.setObjectName("chbDestination")
         self.VLayoutGropbox.addWidget(self.chbDestination)
@@ -105,12 +108,20 @@ class Ui_ConfirmTourDialog(object):
 
         self.retranslateUi(ConfirmTourDialog)
         QtCore.QMetaObject.connectSlotsByName(ConfirmTourDialog)
+        ConfirmTourDialog.setTabOrder(self.btnSearchId, self.txtTourId)
+        ConfirmTourDialog.setTabOrder(self.txtTourId, self.chbSelectAll)
+        ConfirmTourDialog.setTabOrder(self.chbSelectAll, self.chbDestination)
+        ConfirmTourDialog.setTabOrder(self.chbDestination, self.chbInsurance)
+        ConfirmTourDialog.setTabOrder(self.chbInsurance, self.chbConfirm)
+        ConfirmTourDialog.setTabOrder(self.chbConfirm, self.btnConfirm)
+        ConfirmTourDialog.setTabOrder(self.btnConfirm, self.btnReturn)
 
     def retranslateUi(self, ConfirmTourDialog):
         _translate = QtCore.QCoreApplication.translate
         ConfirmTourDialog.setWindowTitle(_translate("ConfirmTourDialog", "تایید اردو"))
         self.label.setText(_translate("ConfirmTourDialog", "کد اردو"))
         self.grpConfirm.setTitle(_translate("ConfirmTourDialog", "چک لیست موارد بررسی برای تایید اردو"))
+        self.chbSelectAll.setText(_translate("ConfirmTourDialog", "انتخاب همه"))
         self.chbDestination.setText(_translate("ConfirmTourDialog", "هماهنگی با مقصد اردو انجام شده است"))
         self.chbInsurance.setText(_translate("ConfirmTourDialog", "مسافران بیمه شده‌اند"))
         self.chbConfirm.setText(_translate("ConfirmTourDialog", "تاییدیه اردو از سازمان‌های نظارتی دربافت شده است"))

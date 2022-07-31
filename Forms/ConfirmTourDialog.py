@@ -20,6 +20,20 @@ class ConfirmTourDialog(Ui_ConfirmTourDialog, QDialog):
         self.btnSearchId.clicked.connect(self.OnSearchIdClicked)
         self.tours = list()
 
+        for chb in self.checkboxes:
+            chb.stateChanged.connect(self.OnCheckedChanged)
+        self.chbSelectAll.clicked.connect(self.OnSelectAllCheckedChanged)
+
+    def OnCheckedChanged(self, checked: bool):
+        if all([chb.isChecked() for chb in self.checkboxes]):
+            self.chbSelectAll.setChecked(True)
+        else:
+            self.chbSelectAll.setChecked(False)
+
+    def OnSelectAllCheckedChanged(self, checked: bool):
+        for chb in self.checkboxes:
+            chb.setChecked(checked)
+
     def OnConfirmClicked(self) -> None:
         self.lblError.setVisible(False)
         if any(not chb.isChecked() for chb in self.checkboxes):
@@ -42,6 +56,7 @@ class ConfirmTourDialog(Ui_ConfirmTourDialog, QDialog):
             self.grpConfirm.setEnabled(len(self.tours) > 0)
             for chb in self.checkboxes:
                 chb.setChecked(False)
+            self.chbSelectAll.setChecked(False)
             self.lblError.setVisible(False)
 
     def ValidateInput(self) -> bool:
@@ -50,11 +65,13 @@ class ConfirmTourDialog(Ui_ConfirmTourDialog, QDialog):
             self.grpConfirm.setEnabled(False)
             for chb in self.checkboxes:
                 chb.setChecked(False)
+            self.chbSelectAll.setChecked(False)
             return False
         if not self.txtTourId.text().strip().isdigit():
             self.grpConfirm.setEnabled(False)
             for chb in self.checkboxes:
                 chb.setChecked(False)
+            self.chbSelectAll.setChecked(False)
             self.lblError.setVisible(True)
             self.lblError.setText('فرمت کد اردو نادرست است')
             return False
@@ -63,6 +80,7 @@ class ConfirmTourDialog(Ui_ConfirmTourDialog, QDialog):
             self.grpConfirm.setEnabled(False)
             for chb in self.checkboxes:
                 chb.setChecked(False)
+            self.chbSelectAll.setChecked(False)
             self.lblError.setVisible(True)
             self.lblError.setText('اردویی با این کد وجود ندارد')
             return False
@@ -70,12 +88,14 @@ class ConfirmTourDialog(Ui_ConfirmTourDialog, QDialog):
             self.grpConfirm.setEnabled(False)
             for chb in self.checkboxes:
                 chb.setChecked(False)
+            self.chbSelectAll.setChecked(False)
             self.lblError.setVisible(True)
             self.lblError.setText('اردوی انتخاب شده در وضعیت «تایید نشده» نیست')
             return False
         self.grpConfirm.setEnabled(True)
         for chb in self.checkboxes:
             chb.setChecked(False)
+        self.chbSelectAll.setChecked(False)
         return True
 
     def eventFilter(self, source: QObject, event: QEvent) -> bool:

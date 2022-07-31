@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>318</width>
-    <height>311</height>
+    <height>349</height>
    </rect>
   </property>
   <property name="font">
@@ -110,6 +110,13 @@
       <property name="bottomMargin">
        <number>10</number>
       </property>
+      <item>
+       <widget class="QCheckBox" name="chbSelectAll">
+        <property name="text">
+         <string>انتخاب همه</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QCheckBox" name="chbDestination">
         <property name="text">
@@ -230,6 +237,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>btnSearchId</tabstop>
+  <tabstop>txtTourId</tabstop>
+  <tabstop>chbSelectAll</tabstop>
+  <tabstop>chbDestination</tabstop>
+  <tabstop>chbInsurance</tabstop>
+  <tabstop>chbConfirm</tabstop>
+  <tabstop>btnConfirm</tabstop>
+  <tabstop>btnReturn</tabstop>
+ </tabstops>
  <resources>
   <include location="resource.qrc"/>
  </resources>
