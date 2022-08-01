@@ -47,6 +47,8 @@ class ChangeUsernamePasswordDialog(Ui_ChangeUsernamePasswordDialog, QDialog):
             return False
         if self.txtUsernameNew.text().strip() != '':
             self.newUsername = self.txtUsernameNew.text().strip()
+        else:
+            self.newUsername = self.username
         if self.txtPasswordNew.text().strip() == '' and self.txtPasswordNewRepeat.text().strip() != '':
             self.lblError.setVisible(True)
             self.lblError.setText('رمز عبور جدید را وارد کنید')
@@ -58,6 +60,9 @@ class ChangeUsernamePasswordDialog(Ui_ChangeUsernamePasswordDialog, QDialog):
         if self.txtPasswordNew.text().strip() != '' and self.txtPasswordNewRepeat.text().strip() != '':
             self.newPassword = self.txtPasswordNew.text().strip()
             self.newPasswordRepeat = self.txtPasswordNewRepeat.text().strip()
+        if self.txtPasswordNew.text().strip() == '' and self.txtPasswordNewRepeat.text().strip() == '':
+            self.newPassword = self.password
+            self.newPasswordRepeat = self.password
         if self.newPassword and self.newPasswordRepeat and self.newPassword != self.newPasswordRepeat:
             self.lblError.setVisible(True)
             self.lblError.setText('تکرار رمز عبور جدید باید با رمز عبور جدید یکسان باشد')
