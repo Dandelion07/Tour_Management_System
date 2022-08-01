@@ -32,7 +32,7 @@ class DeleteUserDialog(Ui_DeleteUserDialog, QDialog):
     def OnDeleteUserClicked(self) -> None:
         if not self.ValidateInputs():
             return
-        if YesNoDialog('آیا از حذف این کارشناس مطمئن هستید؟', 'حذف کارشناس', self) == QDialog.Rejected:
+        if YesNoDialog('آیا از حذف این کارشناس مطمئن هستید؟', 'حذف کارشناس', self).exec() == QDialog.Rejected:
             return
         res = Account.DeleteUser(self.username, self.adminUsername)
         if not res:
