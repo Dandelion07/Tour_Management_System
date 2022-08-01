@@ -120,17 +120,13 @@ class Tour:
     def SearchTours(cls, destination: str = None, origin: str = None, capacity: int = None, fromTime: datetime = None, toTime: datetime = None, status: str = None, includePassengers: bool = False, includeCars: bool = False) -> List['Tour']:
         queryString = "SELECT t.[Id], t.[Destination], t.[Origin], t.[Capacity], t.[DepartTime], t.[ReturnTime], t.[Status] "
         if includePassengers:
-            queryString += ', group_concat(p.[PassengerId], "-") AS Passengers '
+            queryString += ', (SELECT group_concat(pp.[PassengerId], "-") FROM [TourTBL] AS tt LEFT JOIN [TourPassengersTBL] AS pp ON tt.Id = pp.TourId WHERE tt.Id = t.Id) AS Passengers '
         if includeCars:
-            queryString += ', group_concat(c.[CarId], "-") AS Cars '
+            queryString += ', (SELECT group_concat(cc.[CarId], "-") FROM [TourTBL] AS tt LEFT JOIN [TourCarsTBL] AS cc ON tt.Id = cc.TourId WHERE tt.Id = t.Id) AS Cars '
 
         queryString += "FROM [TourTBL] AS t "
         conditions = list()
         params = list()
-        if includePassengers:
-            queryString += "LEFT JOIN [TourPassengersTBL] AS p ON t.Id = p.TourId "
-        if includeCars:
-            queryString += "LEFT JOIN [TourCarsTBL] AS c ON t.Id = c.TourId "
         if destination is not None:
             conditions.append(f'[Destination] LIKE ?')
             params.append(f'%{destination}%')
@@ -153,8 +149,6 @@ class Tour:
             params.append(status)
         if len(conditions) > 0:
             queryString += "WHERE " + ' AND '.join(conditions)
-        if includePassengers or includeCars:
-            queryString += " GROUP BY t.[Id]"
         cursor = DatabaseManager.query(queryString, *params)
         rows = cursor.fetchall()
         tours = list()
